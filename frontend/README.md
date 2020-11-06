@@ -1,55 +1,27 @@
-# Reverse Proxy example
+# SoundQuest frontend
 
-This example applies this gist https://gist.github.com/jamsesso/67fd937b74989dc52e33 to Nextjs and provides:
+The frontend is a React app served by [next.js](https://nextjs.org/).
 
-- Reverse proxy in development mode by add `http-proxy-middleware` to custom server
-- NOT a recommended approach to production scale (hence explicit dev flag) as we should scope proxy as outside UI applications and have separate web server taking care of that.
+## Frontend local development
 
-Sorry for the extra packages. I belong to the minority camp of writing ES6 code on Windows developers. Essentially you only need `http-proxy-middleware` on top of bare-bone Nextjs setup to run this example.
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+* Start the backend stack with Docker Compose from the root of the repository:
 
 ```bash
-npx create-next-app --example with-custom-reverse-proxy with-custom-reverse-proxy-app
-# or
-yarn create next-app --example with-custom-reverse-proxy with-custom-reverse-proxy-app
+docker-compose up -d
 ```
 
-## What it does
+* Start the frontend in local dev mode from this folder:
 
-Take any random query string to the index page and does a GET to `/api/<query string>` which gets routed internally to `https://swapi.co/api/<query string>`, or any API endpoint you wish to configure through the proxy.
-
-## Expectation
-
-/api/people/2 routed to https://swapi.co/api/people/2
-Try Reset
-
-```json
-{
-  "name": "C-3PO",
-  "height": "167",
-  "mass": "75",
-  "hair_color": "n/a",
-  "skin_color": "gold",
-  "eye_color": "yellow",
-  "birth_year": "112BBY",
-  "gender": "n/a",
-  "homeworld": "https://swapi.co/api/planets/1/",
-  "films": [
-    "https://swapi.co/api/films/2/",
-    "https://swapi.co/api/films/5/",
-    "https://swapi.co/api/films/4/",
-    "https://swapi.co/api/films/6/",
-    "https://swapi.co/api/films/3/",
-    "https://swapi.co/api/films/1/"
-  ],
-  "species": ["https://swapi.co/api/species/2/"],
-  "vehicles": [],
-  "starships": [],
-  "created": "2014-12-10T15:10:51.357000Z",
-  "edited": "2014-12-20T21:17:50.309000Z",
-  "url": "https://swapi.co/api/people/2/"
-}
+```bash
+npm run dev
 ```
+
+* The frontend runs on port 3000: [http://localhost:3000](http://localhost:3000)
+
+## Backend proxy for local development
+
+For local development, the frontend also serves as proxy to the backend server. All routes starting with `http://localhost:3000/api` and `http://localhost:3000/backend` are forwarded to the backend server. To see docs of the backend API go to [http://localhost:3000/backend/docs](http://localhost:3000/backend/docs). To use the API, use the `http://localhost:3000/api/` endpoints.
+
+The proxy settings can be found in the [server.js](server.js). The backend server is expected to be available on `http://localhost:8888` as provided by Docker Compose.
+
+Adopted from [https://github.com/vercel/next.js/tree/master/examples/with-custom-reverse-proxy](https://github.com/vercel/next.js/tree/master/examples/with-custom-reverse-proxy).
