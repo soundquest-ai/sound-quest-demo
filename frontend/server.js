@@ -3,10 +3,19 @@ const express = require('express')
 const next = require('next')
 
 const devProxy = {
+  // make all the backend api (including /backend/docs) available
+  '/backend': {
+    target: 'http://localhost:8888',
+    pathRewrite: { '^/backend/': '/' },
+    changeOrigin: true,
+    logLevel: 'debug'
+  },
+  // map all routes starting with /api unchanged to the backend
   '/api': {
-    target: 'http://localhost/',
+    target: 'http://localhost:8888',
     pathRewrite: { '^/': '/' },
     changeOrigin: true,
+    logLevel: 'info'
   },
 }
 
