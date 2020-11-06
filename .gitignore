@@ -1,2 +1,7 @@
 # python stuff
 __pycache__
+.mypy_cache
+
+.vscode
+
+docker-stack.yml
