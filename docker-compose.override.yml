@@ -35,6 +35,9 @@ services:
   flower:
     ports:
       - "5555:5555"
+  db:
+    ports:
+      - "55433:5432"
 
   backend:
     ports:
