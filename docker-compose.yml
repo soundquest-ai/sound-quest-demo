@@ -143,11 +143,14 @@ services:
       - db
     env_file:
       - .env
+    volumes:
+      - ./file_store:/file_store
     environment:
       - SERVER_NAME=${DOMAIN?Variable not set}
       - SERVER_HOST=https://${DOMAIN?Variable not set}
       # Allow explicit env var override for tests
       - SMTP_HOST=${SMTP_HOST}
+      - FILE_STORE=/file_store
     build:
       context: ./backend
       dockerfile: backend.dockerfile
