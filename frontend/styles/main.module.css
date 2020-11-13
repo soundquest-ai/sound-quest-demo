@@ -1,0 +1,58 @@
+/* LOGO */
+.logoContainer {
+  margin: 3rem auto 0;
+  height: 10vh;
+  width: 97%;
+  background-color: rgb(65, 168, 176);
+  display: flex;
+  justify-content: space-between;
+}
+
+.logoImgContainer {
+  height: 6rem;
+  width: 20rem;
+  background-color: green;
+  margin: 1.5rem 2.5rem;
+}
+
+/* END LOGO */
+
+/* SEARCH SECTION */
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  width: 97%;
+  height: 85vh;
+  margin: 0 auto;
+  background-color: #fefefe;
+}
+
+.searchMain {
+  flex-grow: 3;
+
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.searchSide {
+  flex-grow: 1;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.searchSelect {
+  font-size: 2rem;
+  padding: 0.5rem;
+  width: 30%;
+}
+
+.searchInput {
+  width: 50%;
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.searchBtn {
+  font-size: 2rem;
+  padding: 0.5rem;
+}
