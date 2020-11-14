@@ -7,7 +7,7 @@ from pydantic import BaseSettings, Field
 
 from sqlalchemy.orm import Session
 
-from fastapi import File, UploadFile, Depends
+from fastapi import File, UploadFile, Depends, HTTPException
 from fastapi.responses import FileResponse
 
 from app import crud, models, schemas
@@ -26,34 +26,15 @@ class Settings(BaseSettings):
 
 
 @router.post("/", response_model=schemas.Document)
-async def upload_file(
+async def create_document(
     *,
     document_in: schemas.DocumentCreate,
     db: Session = Depends(deps.get_db),
-    file: UploadFile = File(...),
 ) -> schemas.Document:
 
     settings = Settings()
 
-    # document = crud.document.get_by_email(db, email=document_in.email)
-    # if document:
-    #     raise HTTPException(
-    #         status_code=400,
-    #         detail="The document with this documentname already exists in the system.",
-    #     )
-
     document = crud.document.create(db, obj_in=document_in)
-    document.filename = target_file_name
-
-    LOG.warning(
-        "Processing uploaded file %s of content type %s.",
-        file.filename,
-        file.content_type,
-    )
-    target_file_name = str(uuid4())
-    target_path = settings.file_store / target_file_name
-
-    target_path.write_bytes(await file.read())
 
     return document
 
@@ -117,6 +98,47 @@ async def download_file(
             detail="The document with this id does not exist in the system",
         )
 
+    if not document.filename:
+        raise HTTPException(
+            status_code=404,
+            detail="The document with this id has no file",
+        )
+
     target_path = settings.file_store / document.filename
+    if not target_path.is_file():
+        raise HTTPException(
+            status_code=404,
+            detail="The file does not exist in the file store",
+        )
 
     return FileResponse(target_path)
+
+
+@router.post("/{document_id}/file")
+async def download_file(
+    document_id: int,
+    db: Session = Depends(deps.get_db),
+    file: UploadFile = File(...),
+):
+    settings = Settings()
+
+    document = crud.document.get(db, id=document_id)
+    if not document:
+        raise HTTPException(
+            status_code=404,
+            detail="The document with this id does not exist in the system",
+        )
+
+    LOG.warning(
+        "Processing uploaded file %s of content type %s.",
+        file.filename,
+        file.content_type,
+    )
+    target_file_name = str(uuid4())
+    target_path = settings.file_store / target_file_name
+
+    target_path.write_bytes(await file.read())
+
+    document.filename = target_file_name
+
+    db.commit()
