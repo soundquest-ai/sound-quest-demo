@@ -1,24 +1,62 @@
-import useSWR from "swr";
+// export default function Search() {
+//   const fetcher = (url) => fetch(url).then((res) => res.json());
+//   const { data, error } = useSWR("/api/v1/docs", fetcher);
 
-export default function Data() {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR("/api/v1/docs", fetcher);
+//   if (error) return <div>failed to load</div>;
+//   if (!data) return <div>loading...</div>;
+//   return <div>hello {data[0].title}!</div>;
+// }
 
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-  return <div>hello {data[0].title}!</div>;
-}
+// const fetcher = (url) => fetch(url).then((res) => res.json());
 
-// import React from "react";
+// export default class Search extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { value: "" };
 
-// export default class ApiHandeling extends React.Component {
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
+
+//   handleChange(event) {
+//     this.setState({ value: event.target.value });
+
+//     const { data, error } = useSWR("/api/v1/docs", fetcher);
+
+//     if (error) return <div>failed to load</div>;
+//     if (!data) return <div>loading...</div>;
+//     if (data[0].title === this.state.value) {
+//       return <div>hello {data[0].title}!</div>;
+//     }
+//   }
+
+//   handleSubmit(event) {
+//     alert("A name was submitted: " + this.state.value);
+//     event.preventDefault();
+//   }
+
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Name:
+//           <input
+//             type="text"
+//             value={this.state.value}
+//             onChange={this.handleChange}
+//           />
+//         </label>
+//         <input type="submit" value="Submit" />
+//       </form>
+//     );
+//   }
+// }
+
+// export default class Search extends React.Component {
 //   constructor() {
 //     super();
 //     this.state = {
-//       loading: false,
-//       character: {},
-//       firstName: "",
-//       lastName: "",
+//       search: "",
 //     };
 //     this.handleChange = this.handleChange.bind(this);
 //   }
@@ -27,46 +65,29 @@ export default function Data() {
 //     this.setState({
 //       loading: true,
 //     });
-//     fetch("https://swapi.dev/api/people/1")
-//       .then((response) => response.json())
-//       .then((data) => {
-//         this.setState({
-//           character: data,
-//           loading: false,
-//         });
-//       });
 //   }
 
 //   handleChange(event) {
+//     const { title, value } = event.target;
 //     this.setState({
-//       [event.target.name]: event.target.value,
+//       [title]: value,
 //     });
 //   }
 
 //   render() {
-//     const text = this.state.loading
-//       ? "Loading ...."
-//       : this.state.character.name;
+//     const text = this.state.loading ? "Loading ...." : this.state.search;
 //     return (
 //       <div>
-//         <h1>{text}</h1>
 //         <form>
 //           <input
 //             type="text"
-//             placeholder="first name"
-//             name="firstName"
+//             placeholder="search"
+//             name="search"
+//             value={this.search}
 //             onChange={this.handleChange}
 //           />
-//           <input
-//             type="text"
-//             placeholder="last name"
-//             name="lastName"
-//             onChange={this.handleChange}
-//           />
-//           <h1>
-//             {this.state.firstName} {this.state.lastName}
-//           </h1>
 //         </form>
+//         <h1>{text}</h1>
 //       </div>
 //     );
 //   }
