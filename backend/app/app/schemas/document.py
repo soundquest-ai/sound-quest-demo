@@ -32,4 +32,4 @@ class Document(DocumentInDBBase):
 
 # Additional properties stored in DB
 class DocumentInDB(DocumentInDBBase):
-    filename: str
+    filename: Optional[str]
