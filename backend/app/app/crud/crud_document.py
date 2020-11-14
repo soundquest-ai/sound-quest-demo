@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, List
 
 from sqlalchemy.orm import Session
 
@@ -9,7 +9,16 @@ from app.schemas.document import DocumentCreate, DocumentUpdate
 
 
 class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
-    pass
+    def get_all_by_title(
+        self, db: Session, *, title: str, skip: int = 0, limit: int = 100
+    ) -> List[Document]:
+        return (
+            db.query(Document)
+            .filter(Document.title.contains(title))
+            .offset(skip)
+            .limit(limit)
+            .all()
+        )
 
 
 document = CRUDDocument(Document)
