@@ -1,5 +1,7 @@
 import styles from "./form.module.css";
 
+import Data from "./ShowData";
+
 export default function FormComponent(props) {
   return (
     <form>
@@ -16,6 +18,7 @@ export default function FormComponent(props) {
             placeholder="search"
           />
           <button className={styles.searchBtn}>Go!</button>
+          <Data />
         </div>
         <div className={styles.searchSide}></div>
       </div>
