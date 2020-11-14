@@ -1,5 +1,6 @@
 import Head from "next/head";
-import mainStyles from "../styles/main.module.css";
+import Header from "../components/Header/Header";
+import Form from "../components/Form/FormContainer";
 
 export default function Home() {
   return (
@@ -9,29 +10,10 @@ export default function Home() {
       </Head>
       <main>
         {/* logos */}
-
-        <div className={mainStyles.logoContainer}>
-          <div className={mainStyles.logoImgContainer}></div>
-          <div className={mainStyles.logoImgContainer}></div>
-        </div>
+        <Header />
 
         {/* search section */}
-
-        <div className={mainStyles.searchContainer}>
-          <div className={mainStyles.searchMain}>
-            <select className={mainStyles.searchSelect}></select>
-            <input
-              className={mainStyles.searchInput}
-              type="text"
-              placeholder="search"
-            />
-            <button className={mainStyles.searchBtn}>Go!</button>
-            {/* components go here */}
-          </div>
-          <div className={mainStyles.searchSide}>
-            {/* components go here */}
-          </div>
-        </div>
+        <Form />
       </main>
     </div>
   );

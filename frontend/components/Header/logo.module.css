@@ -1,0 +1,18 @@
+/* LOGO */
+.logoContainer {
+  margin: 3rem auto 0;
+  height: 10vh;
+  width: 97%;
+  background-color: rgb(65, 168, 176);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoImgContainer {
+  height: 6rem;
+  width: 20rem;
+  background-color: green;
+}
+
+/* END LOGO */
