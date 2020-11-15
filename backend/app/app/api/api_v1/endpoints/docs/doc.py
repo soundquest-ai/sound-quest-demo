@@ -3,14 +3,12 @@ from typing import List, Any
 from uuid import uuid4
 from pathlib import Path
 
-from pydantic import BaseSettings, Field
-
 from sqlalchemy.orm import Session
 
 from fastapi import File, UploadFile, Depends, HTTPException
 from fastapi.responses import FileResponse
 
-from app import crud, models, schemas
+from app import crud, models, schemas, file_store
 from app.api import deps
 from app.core.config import settings
 from app.utils import send_new_account_email
@@ -19,10 +17,6 @@ from .router import router
 
 
 LOG = logging.getLogger(__name__)
-
-
-class Settings(BaseSettings):
-    file_store: Path = Field(..., env="FILE_STORE")
 
 
 @router.post("/", response_model=schemas.Document)
@@ -89,7 +83,6 @@ async def download_file(
     document_id: int,
     db: Session = Depends(deps.get_db),
 ):
-    settings = Settings()
 
     document = crud.document.get(db, id=document_id)
     if not document:
@@ -104,12 +97,14 @@ async def download_file(
             detail="The document with this id has no file",
         )
 
-    target_path = settings.file_store / document.filename
-    if not target_path.is_file():
+    try:
+        target_path = file_store.get_file_for_doc(document)
+    except ValueError as err:
         raise HTTPException(
             status_code=404,
-            detail="The file does not exist in the file store",
+            detail=str(err),
         )
+    assert target_path.is_file()
 
     return FileResponse(target_path)
 
