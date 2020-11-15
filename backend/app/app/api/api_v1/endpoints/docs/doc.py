@@ -115,7 +115,7 @@ async def download_file(
 
 
 @router.post("/{document_id}/file")
-async def download_file(
+async def upload_file(
     document_id: int,
     db: Session = Depends(deps.get_db),
     file: UploadFile = File(...),
