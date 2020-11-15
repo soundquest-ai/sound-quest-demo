@@ -1,94 +1,29 @@
-// export default function Search() {
-//   const fetcher = (url) => fetch(url).then((res) => res.json());
-//   const { data, error } = useSWR("/api/v1/docs", fetcher);
+import React from "react";
+import styles from "./data.module.css";
+// import useSWR from "swr";
 
+export default function DisplayData(props) {
+  return (
+    <div className={styles.container}>
+      <div>
+        <h3>Name: {props.title}!</h3>
+        <h3>Time: {Date()}!</h3>
+      </div>
+      <div>Player</div>
+    </div>
+  );
+}
+
+// export default class ShowData extends React.Component {
+//   render() {
+//     return <Search />;
+//   }
+// }
+
+// function Search() {
+//   const fetcher = (url) => fetch(url).then((res) => res.json());
+//   const { data, error } = useSWR("/api/v1/docs");
 //   if (error) return <div>failed to load</div>;
 //   if (!data) return <div>loading...</div>;
-//   return <div>hello {data[0].title}!</div>;
-// }
-
-// const fetcher = (url) => fetch(url).then((res) => res.json());
-
-// export default class Search extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { value: "" };
-
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }
-
-//   handleChange(event) {
-//     this.setState({ value: event.target.value });
-
-//     const { data, error } = useSWR("/api/v1/docs", fetcher);
-
-//     if (error) return <div>failed to load</div>;
-//     if (!data) return <div>loading...</div>;
-//     if (data[0].title === this.state.value) {
-//       return <div>hello {data[0].title}!</div>;
-//     }
-//   }
-
-//   handleSubmit(event) {
-//     alert("A name was submitted: " + this.state.value);
-//     event.preventDefault();
-//   }
-
-//   render() {
-//     return (
-//       <form onSubmit={this.handleSubmit}>
-//         <label>
-//           Name:
-//           <input
-//             type="text"
-//             value={this.state.value}
-//             onChange={this.handleChange}
-//           />
-//         </label>
-//         <input type="submit" value="Submit" />
-//       </form>
-//     );
-//   }
-// }
-
-// export default class Search extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       search: "",
-//     };
-//     this.handleChange = this.handleChange.bind(this);
-//   }
-
-//   componentDidMount() {
-//     this.setState({
-//       loading: true,
-//     });
-//   }
-
-//   handleChange(event) {
-//     const { title, value } = event.target;
-//     this.setState({
-//       [title]: value,
-//     });
-//   }
-
-//   render() {
-//     const text = this.state.loading ? "Loading ...." : this.state.search;
-//     return (
-//       <div>
-//         <form>
-//           <input
-//             type="text"
-//             placeholder="search"
-//             name="search"
-//             value={this.search}
-//             onChange={this.handleChange}
-//           />
-//         </form>
-//         <h1>{text}</h1>
-//       </div>
-//     );
-//   }
+//   return <DisplayData item={data} />;
 // }
