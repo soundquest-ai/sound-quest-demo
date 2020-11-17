@@ -20,6 +20,7 @@ class DocumentUpdate(DocumentBase):
 
 class DocumentInDBBase(DocumentBase):
     id: Optional[int] = None
+    filename: Optional[str]
 
     class Config:
         orm_mode = True
@@ -32,4 +33,4 @@ class Document(DocumentInDBBase):
 
 # Additional properties stored in DB
 class DocumentInDB(DocumentInDBBase):
-    filename: Optional[str]
+    pass
