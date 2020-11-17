@@ -129,7 +129,7 @@ async def upload_file(
         file.filename,
         file.content_type,
     )
-    target_file_name = str(uuid4())
+    target_file_name = str(uuid4()) + Path(file.filename).suffix
     target_path = settings.file_store / target_file_name
 
     target_path.write_bytes(await file.read())
