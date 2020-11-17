@@ -52,7 +52,7 @@ export default class FormComponent extends React.Component {
 function Data(props) {
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data, error } = useSWR(
-    `http://localhost:3000/api/v1/filter/?filter=${props.value}&skip=0&limit=100`,
+    `/api/v1/filter/?filter=${props.value}&skip=0&limit=100`,
     fetcher
   );
 
