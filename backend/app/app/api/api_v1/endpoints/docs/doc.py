@@ -115,7 +115,7 @@ async def upload_file(
     db: Session = Depends(deps.get_db),
     file: UploadFile = File(...),
 ):
-    settings = Settings()
+    settings = file_store.Settings()
 
     document = crud.document.get(db, id=document_id)
     if not document:
