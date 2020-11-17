@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link'
 import styles from "./form.module.css";
 import stylesTwo from "./data.module.css";
 import useSWR from "swr";
@@ -62,7 +63,7 @@ function Data(props) {
     props.value === "" ? (
       <></>
     ) : (
-      <DisplayData key={item.id} title={item.title} />
+      <DisplayData key={item.id} title={item.title} document_id={item.id} />
     )
   );
   return <div>{dataComponents}</div>;
@@ -72,7 +73,7 @@ function DisplayData(props) {
   return (
     <div className={stylesTwo.container}>
       <div>
-        <h3>Response: {props.title}!</h3>
+          <h3>Response: <Link href={`/docs/${encodeURIComponent(props.document_id)}`}>{props.title}</Link></h3>
         <h3>Time: {Date()}!</h3>
       </div>
       {/* your music player goes here! */}
