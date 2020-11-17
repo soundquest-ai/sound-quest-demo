@@ -23,3 +23,14 @@ def get_file_for_doc(document: models.Document) -> Path:
         raise ValueError("The file does not exist in the file store")
 
     return target_path
+
+
+def get_transcript(document: models.Document, platform: str) -> Path:
+
+    assert document
+    assert document.filename
+
+    doc_path = settings.file_store / document.filename
+    transcript_path = settings.file_store / f"{document.filename}.{platform}.json"
+
+    return transcript_path
