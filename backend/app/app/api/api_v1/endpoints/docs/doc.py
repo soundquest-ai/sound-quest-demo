@@ -26,8 +26,6 @@ async def create_document(
     db: Session = Depends(deps.get_db),
 ) -> schemas.Document:
 
-    settings = Settings()
-
     document = crud.document.create(db, obj_in=document_in)
 
     return document
@@ -129,7 +127,10 @@ async def upload_file(
         file.filename,
         file.content_type,
     )
-    target_file_name = str(uuid4()) + Path(file.filename).suffix
+
+    file_key = await file_store.get_hash(file)
+
+    target_file_name = file_key + Path(file.filename).suffix
     target_path = settings.file_store / target_file_name
 
     target_path.write_bytes(await file.read())

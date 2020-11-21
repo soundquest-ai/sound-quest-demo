@@ -1,4 +1,7 @@
+from fastapi import UploadFile
+
 from pathlib import Path
+import hashlib
 
 from pydantic import BaseSettings, Field
 
@@ -34,3 +37,19 @@ def get_transcript(document: models.Document, platform: str) -> Path:
     transcript_path = settings.file_store / f"{document.filename}.{platform}.json"
 
     return transcript_path
+
+
+async def get_hash(upload: UploadFile) -> str:
+    """computes the sha256 hash of an uploaded"""
+
+    h = hashlib.md5()
+
+    while True:
+        # Reading is buffered, so we can read smaller chunks.
+        chunk = await upload.read(h.block_size)
+        if not chunk:
+            break
+        h.update(chunk)
+
+    await upload.seek(0)
+    return h.hexdigest()
