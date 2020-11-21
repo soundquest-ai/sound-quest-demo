@@ -76,6 +76,17 @@ def update_document(
     return document
 
 
+@router.delete("/{document_id}")
+def delete_document(
+    document_id: int,
+    db: Session = Depends(deps.get_db),
+) -> Any:
+    """
+    Get a specific document by id.
+    """
+    crud.document.remove(db, id=document_id)
+
+
 @router.get("/{document_id}/file")
 async def download_file(
     document_id: int,
