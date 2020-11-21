@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./form.module.css";
 import stylesTwo from "./data.module.css";
 import useSWR from "swr";
+import Player from "./Player";
 
 export default class FormComponent extends React.Component {
   constructor(props) {
@@ -42,7 +43,6 @@ export default class FormComponent extends React.Component {
             </button>
             <Data value={this.state.search} />
           </div>
-          <div className={styles.searchSide}></div>
         </div>
       </form>
     );
@@ -62,7 +62,7 @@ function Data(props) {
     props.value === "" ? (
       <></>
     ) : (
-      <DisplayData key={item.id} title={item.title} />
+      <DisplayData key={item.id} id={item.id} title={item.title} />
     )
   );
   return <div>{dataComponents}</div>;
@@ -75,8 +75,7 @@ function DisplayData(props) {
         <h3>Response: {props.title}!</h3>
         <h3>Time: {Date()}!</h3>
       </div>
-      {/* your music player goes here! */}
-      <div>Player </div>
+      <Player document_id={props.id} />
     </div>
   );
 }
