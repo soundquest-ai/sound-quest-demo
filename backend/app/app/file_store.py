@@ -20,7 +20,12 @@ def get_file_for_doc(document: models.Document) -> Path:
     assert document
     assert document.filename
 
-    target_path = settings.file_store / document.filename
+    return get_file_for_key(document.filename)
+
+
+def get_file_for_key(filekey: str) -> Path:
+
+    target_path = settings.file_store / filekey
 
     if not target_path.is_file():
         raise ValueError("The file does not exist in the file store")
@@ -28,13 +33,14 @@ def get_file_for_doc(document: models.Document) -> Path:
     return target_path
 
 
-def get_transcript(document: models.Document, platform: str) -> Path:
+def get_transcript_key(filekey: str, lang: str, platform: str) -> str:
+    return f"transcript/default_project/{filekey}.{lang}.{platform}.json"
 
-    assert document
-    assert document.filename
 
-    doc_path = settings.file_store / document.filename
-    transcript_path = settings.file_store / f"{document.filename}.{platform}.json"
+def get_transcript_path(filekey: str, lang: str, platform: str) -> Path:
+
+    transcript_key = get_transcript_key(filekey, lang=lang, platform=platform)
+    transcript_path = settings.file_store / transcript_key
 
     return transcript_path
 
