@@ -8,7 +8,7 @@ import Player from "./Player";
 export default class FormComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "", search: "", initialSearch: props.initialSearch };
+    this.state = { value: "", search: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
