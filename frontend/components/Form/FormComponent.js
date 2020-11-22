@@ -71,11 +71,8 @@ function DisplayData(props) {
   return (
     <div className={stylesTwo.container}>
       <div>
-
-       
-
           <h3>Response: <Link href={`/docs/${encodeURIComponent(props.document_id)}`}>{props.title}</Link></h3>
-        <h3>Time: {Date()}!</h3>
+        <h3>Time: {date.toLocaleDateString()}!</h3>
 
       </div>
       <Player document_id={props.id} />
