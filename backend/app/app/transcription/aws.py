@@ -7,6 +7,8 @@ from fastapi import Depends
 import boto3, botocore
 
 from app import file_store
+from app.models import Document
+from app.models.transcript.aws import AWSTranscription
 
 LOG = logging.getLogger(__name__)
 
@@ -85,3 +87,23 @@ def transcribe(
     # download the file and store it in the transcript file
     transcript_obj.download_file(str(transcript_file))
     return json.load(transcript_file.open())
+
+
+def transcribe_document(
+    document: Document,
+    aws_bucket_name: str,
+    lang: str,
+):
+
+    filekey = document.filename
+
+    job_raw = transcribe(
+        filekey=filekey,
+        aws_bucket_name=aws_bucket_name,
+        lang=lang,
+    )
+    full_text = job_raw["results"]["transcripts"][0]["transcript"]
+
+    transcription = AWSTranscription(raw=job_raw, full_text=full_text)
+
+    document.transcription = transcription

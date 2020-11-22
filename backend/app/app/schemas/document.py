@@ -3,6 +3,16 @@ from typing import Optional
 from pydantic import BaseModel
 
 
+class AWSTranscription(BaseModel):
+
+    id: int
+
+    full_text: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+
 # Shared properties
 class DocumentBase(BaseModel):
     title: Optional[str] = None
@@ -21,6 +31,7 @@ class DocumentUpdate(DocumentBase):
 class DocumentInDBBase(DocumentBase):
     id: Optional[int] = None
     filename: Optional[str]
+    transcription: Optional[AWSTranscription]
 
     class Config:
         orm_mode = True

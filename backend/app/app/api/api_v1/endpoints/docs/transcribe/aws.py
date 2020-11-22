@@ -21,13 +21,13 @@ def transcribe_with_aws(
     """
     Get a specific document by id.
     """
+
     document = crud.document.get(db, id=document_id)
 
-    filekey = document.filename
+    aws.transcribe_document(document, aws_bucket_name=aws_bucket_name, lang=lang)
 
-    transcript = aws.transcribe(
-        filekey=filekey,
-        aws_bucket_name=aws_bucket_name,
-        lang=lang,
-    )
-    return transcript
+    assert document.transcription
+    db.commit()
+    db.refresh(document)
+
+    return document
