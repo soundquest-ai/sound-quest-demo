@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from "./form.module.css";
 import stylesTwo from "./data.module.css";
 import useSWR from "swr";
+import Player from "./Player";
 
 export default class FormComponent extends React.Component {
   constructor(props) {
@@ -27,10 +28,6 @@ export default class FormComponent extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className={styles.searchContainer}>
           <div className={styles.searchMain}>
-            <select className={styles.searchSelect}>
-              <option>----</option>
-              <option>Page Numbers go here</option>
-            </select>
             <input
               className={styles.searchInput}
               type="text"
@@ -43,7 +40,6 @@ export default class FormComponent extends React.Component {
             </button>
             <Data value={this.state.search} />
           </div>
-          <div className={styles.searchSide}></div>
         </div>
       </form>
     );
@@ -62,22 +58,27 @@ function Data(props) {
   const dataComponents = data.map((item) =>
     props.value === "" ? (
       <></>
-    ) : (
+    ) : 
       <DisplayData key={item.id} title={item.title} document_id={item.id} />
+
     )
   );
   return <div>{dataComponents}</div>;
 }
 
 function DisplayData(props) {
+  const date = new Date();
   return (
     <div className={stylesTwo.container}>
       <div>
+
+       
+
           <h3>Response: <Link href={`/docs/${encodeURIComponent(props.document_id)}`}>{props.title}</Link></h3>
         <h3>Time: {Date()}!</h3>
+
       </div>
-      {/* your music player goes here! */}
-      <div>Player </div>
+      <Player document_id={props.id} />
     </div>
   );
 }

@@ -10,11 +10,6 @@
 }
 
 .searchMain {
-  flex-grow: 3;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-.searchSide {
   flex-grow: 1;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
@@ -37,4 +32,4 @@
   padding: 0.5rem;
 }
 
-/* END SEARCH SECTIOn */
+/* END SEARCH SECTION */
