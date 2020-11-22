@@ -144,7 +144,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./file_store:/file_store
+      - file_store:/file_store
     environment:
       - SERVER_NAME=${DOMAIN?Variable not set}
       - SERVER_HOST=https://${DOMAIN?Variable not set}
@@ -196,6 +196,7 @@ services:
 
 volumes:
   app-db-data:
+  file_store:
 
 networks:
   traefik-public:
