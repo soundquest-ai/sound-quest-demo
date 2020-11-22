@@ -1,8 +1,6 @@
 .container {
-  border-top: 1px groove #222222;
   padding: 2rem;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  border-bottom: 1px groove #222222;
+  border-bottom: 1px groove #212121;
 }

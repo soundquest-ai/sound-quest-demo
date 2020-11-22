@@ -21,13 +21,19 @@ const AWSSoundPlayer = withCustomAudio((props) => {
     <div className={styles.container}>
       <h2 className={styles.title}>{trackTitle}</h2>
       <PlayButton className={styles.playBtn} {...props} />
-
+      <VolumeControl
+        className={styles.volumeControl}
+        buttonClassName={styles.btnVolumeControl}
+        rangeClassName={styles.rangeVolumeControl}
+        {...props}
+      />
       <Progress
         className={styles.progress}
         innerClassName={styles.inner}
         value={(currentTime / duration) * 100 || 0}
         {...props}
       />
+      <Timer className={styles.timer} {...props} />
     </div>
   );
 });

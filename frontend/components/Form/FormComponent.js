@@ -27,10 +27,6 @@ export default class FormComponent extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className={styles.searchContainer}>
           <div className={styles.searchMain}>
-            <select className={styles.searchSelect}>
-              <option>----</option>
-              <option>Page Numbers go here</option>
-            </select>
             <input
               className={styles.searchInput}
               type="text"
@@ -69,11 +65,12 @@ function Data(props) {
 }
 
 function DisplayData(props) {
+  const date = new Date();
   return (
     <div className={stylesTwo.container}>
       <div>
         <h3>Response: {props.title}!</h3>
-        <h3>Time: {Date()}!</h3>
+        <h3>Date: {date.toLocaleString()}!</h3>
       </div>
       <Player document_id={props.id} />
     </div>
