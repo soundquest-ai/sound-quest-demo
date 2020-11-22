@@ -58,11 +58,10 @@ function Data(props) {
   const dataComponents = data.map((item) =>
     props.value === "" ? (
       <></>
-    ) : 
+    ) :
       <DisplayData key={item.id} title={item.title} document_id={item.id} />
 
-    )
-  );
+    );
   return <div>{dataComponents}</div>;
 }
 
