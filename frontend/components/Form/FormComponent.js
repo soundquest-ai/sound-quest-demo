@@ -74,7 +74,7 @@ function DisplayData(props) {
         <h3>Time: {date.toLocaleDateString()}!</h3>
 
       </div>
-      <Player document_id={props.id} />
+      <Player document_id={props.document_id} />
     </div>
   );
 }
