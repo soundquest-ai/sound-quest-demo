@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Header from "../components/Header/Header";
+import FormContainer from "../components/Search-Results/FormContainer";
 import HomeSearch from "../components/Home/HomeSearch";
 
-export default function Home() {
+export default function Search() {
   return (
     <div>
       <Head>
@@ -11,7 +12,7 @@ export default function Home() {
       <main>
         {/* logos */}
         <Header />
-        <HomeSearch />
+        <FormContainer />
       </main>
     </div>
   );

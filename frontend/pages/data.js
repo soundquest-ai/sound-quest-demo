@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Header from "../components/Header/Header";
-import HomeSearch from "../components/Home/HomeSearch";
+import Data from "../components/Individual-Data-Page/RenderData";
 
 export default function Home() {
   return (
@@ -9,9 +8,7 @@ export default function Home() {
         <title>SoundQuest</title>
       </Head>
       <main>
-        {/* logos */}
-        <Header />
-        <HomeSearch />
+        <Data />
       </main>
     </div>
   );
