@@ -8,6 +8,7 @@ from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
 from .transcript.aws import AWSTranscription
+from .word import Word
 
 
 class Document(Base):
@@ -19,3 +20,8 @@ class Document(Base):
 
     fk_aws_transcription = Column(Integer, ForeignKey("aws_transcription.id"))
     transcription = relationship(AWSTranscription)
+
+    words = relationship(Word, cascade="all, delete-orphan", order_by=Word.order)
+
+
+Word.document = relationship(Document, back_populates="words")

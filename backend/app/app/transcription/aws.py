@@ -2,12 +2,14 @@ from typing import Any
 import logging
 import time
 import json
+from datetime import timedelta
 
-from fastapi import Depends
+
 import boto3, botocore
 
+from fastapi import Depends
 from app import file_store
-from app.models import Document
+from app.models import Document, Word
 from app.models.transcript.aws import AWSTranscription
 
 LOG = logging.getLogger(__name__)
@@ -105,5 +107,20 @@ def transcribe_document(
     full_text = job_raw["results"]["transcripts"][0]["transcript"]
 
     transcription = AWSTranscription(raw=job_raw, full_text=full_text)
+    document.words = []
+
+    for i, item in enumerate(job_raw["results"]["items"]):
+        if item["type"] == "punctuation":
+            continue
+        alternative = item["alternatives"][0]
+        assert "start_time" in item, item
+        word = Word(
+            word=alternative["content"],
+            order=i,
+            start_time=timedelta(seconds=float(item["start_time"])),
+            end_time=timedelta(seconds=float(item["end_time"])),
+            confidence=float(alternative["confidence"]),
+        )
+        document.words.append(word)
 
     document.transcription = transcription

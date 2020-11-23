@@ -1,6 +1,8 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
+
+from .word import Word
 
 
 class AWSTranscription(BaseModel):
@@ -32,6 +34,7 @@ class DocumentInDBBase(DocumentBase):
     id: Optional[int] = None
     filename: Optional[str]
     transcription: Optional[AWSTranscription]
+    words: List[Word] = []
 
     class Config:
         orm_mode = True
