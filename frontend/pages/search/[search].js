@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Header from "../../components/Header/Header";
-import FormContainer from "../../components/Search-Results/FormContainer";
+import SearchResult from "../../components/Search-Results/SearchResult";
 
 function Search({ search }) {
   return (
@@ -10,7 +10,7 @@ function Search({ search }) {
       </Head>
       <main>
         <Header />
-        <FormContainer search={search} />
+        <SearchResult search={search} />
       </main>
     </div>
   );

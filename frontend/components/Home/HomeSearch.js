@@ -6,7 +6,6 @@ import Link from "next/link";
 export default function HomeSearch() {
   const [search, setSearch] = useState(null);
   function onChangeHandler(e) {
-    console.log(e.target.value);
     setSearch(e.target.value);
   }
 
@@ -17,7 +16,7 @@ export default function HomeSearch() {
         <input
           className={styles.searchInput}
           type="text"
-          placeholder="doesn't work yet... click go"
+          placeholder="Search SoundQuest"
           onChange={onChangeHandler}
         />
         <div className={styles.searchBtnContainer}>
