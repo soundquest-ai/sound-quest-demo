@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./renderData.module.css";
-// import Player from "./Player";
+import Player from "../MusicPlayer/Player";
 
 const IndividualData = ({ data }) => {
   return (
@@ -18,7 +18,7 @@ const IndividualData = ({ data }) => {
         </Link>
       </div>
       <h1 className={styles.title}>{data.title}</h1>
-      {/* <Player /> */}
+      <Player document_id={data.document_id} />
     </div>
   );
 };

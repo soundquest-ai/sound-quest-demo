@@ -13,7 +13,7 @@ const AWSSoundPlayer = withCustomAudio((props) => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{trackTitle}</h2>
+      {/* <h2 className={styles.title}>{trackTitle}</h2> */}
       <PlayButton className={styles.playBtn} {...props} />
       <VolumeControl
         className={styles.volumeControl}
