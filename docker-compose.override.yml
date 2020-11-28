@@ -1,6 +1,5 @@
 version: "3.3"
 services:
-
   proxy:
     ports:
       - "8888:80"
@@ -44,7 +43,7 @@ services:
       - "8889:80"
     volumes:
       - ./backend/app:/app
-      - ~/.aws:/aws_cfg
+      - ./backend/.aws:/aws_cfg
     environment:
       - JUPYTER=jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.custom_display_url=http://127.0.0.1:8888
       - SERVER_HOST=http://${DOMAIN?Variable not set}
@@ -63,6 +62,7 @@ services:
       - traefik.constraint-label-stack=${TRAEFIK_TAG?Variable not set}
       - traefik.http.routers.${STACK_NAME?Variable not set}-backend-http.rule=PathPrefix(`/api`) || PathPrefix(`/docs`) || PathPrefix(`/redoc`)
       - traefik.http.services.${STACK_NAME?Variable not set}-backend.loadbalancer.server.port=80
+
 
   # celeryworker:
   #   volumes:
