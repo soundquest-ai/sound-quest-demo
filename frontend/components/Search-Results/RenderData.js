@@ -1,6 +1,6 @@
 import styles from "./renderData.module.css";
 import useSWR from "swr";
-import Player from "./Player";
+import Player from "../MusicPlayer/Player";
 import Link from "next/link";
 
 export default function RenderData(props) {

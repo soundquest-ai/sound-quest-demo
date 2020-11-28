@@ -1,22 +1,24 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./renderData.module.css";
-// import Player from "./Player";
+import Player from "../MusicPlayer/Player";
 
 const IndividualData = ({ data }) => {
   return (
     <div>
-      <Link href="/" className={styles.linkStyles}>
-        <div>Home</div>
-      </Link>
+      <div className={styles.linkStyles}>
+        <Link href="/">Home</Link>
+      </div>
 
-      <Link
-        href={{ pathname: "/search/[search]", query: { search: data.title } }}
-        className={styles.linkStyles}
-      >
-        <div>Search</div>
-      </Link>
-      <h1>{data.title}</h1>
+      <div className={styles.linkStyles}>
+        <Link
+          href={{ pathname: "/search/[search]", query: { search: data.title } }}
+        >
+          Search
+        </Link>
+      </div>
+      <h1 className={styles.title}>{data.title}</h1>
+      <Player document_id={data.document_id} />
     </div>
   );
 };

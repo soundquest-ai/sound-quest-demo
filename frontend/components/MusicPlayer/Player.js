@@ -8,18 +8,12 @@ import {
 } from "react-soundplayer/components";
 import { withCustomAudio } from "react-soundplayer/addons";
 
-// audio source
-const streamUrl = "/api/v1/docs/2/file";
-
-// some track meta information
-const trackTitle = "Great song by random artist";
-
 const AWSSoundPlayer = withCustomAudio((props) => {
   const { trackTitle, currentTime, duration } = props;
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{trackTitle}</h2>
+      {/* <h2 className={styles.title}>{trackTitle}</h2> */}
       <PlayButton className={styles.playBtn} {...props} />
       <VolumeControl
         className={styles.volumeControl}
