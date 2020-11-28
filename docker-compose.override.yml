@@ -44,9 +44,12 @@ services:
       - "8889:80"
     volumes:
       - ./backend/app:/app
+      - ~/.aws:/aws_cfg
     environment:
       - JUPYTER=jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.custom_display_url=http://127.0.0.1:8888
       - SERVER_HOST=http://${DOMAIN?Variable not set}
+      - AWS_CONFIG_FILE=/aws_cfg/config
+      - AWS_SHARED_CREDENTIALS_FILE=/aws_cfg/credentials
     build:
       context: ./backend
       dockerfile: backend.dockerfile
