@@ -28,7 +28,15 @@ function DisplayData(props) {
     <div className={styles.container}>
       <div>
         <h3>
-          Response: <Link href="/data">{props.title}</Link>
+          Response:{" "}
+          <Link
+            href={{
+              pathname: "/docs/[document_id]",
+              query: { document_id: props.document_id },
+            }}
+          >
+            {props.title}
+          </Link>
         </h3>
         <h3>Time: {date.toLocaleDateString()}!</h3>
       </div>

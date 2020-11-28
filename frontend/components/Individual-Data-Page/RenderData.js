@@ -1,38 +1,24 @@
 import React from "react";
 import Link from "next/link";
+import styles from "./renderData.module.css";
 // import Player from "./Player";
 
-export default class Data extends React.Component {
-  render() {
-    return (
-      <div>
-        <Link href="/">
-          <div
-            style={{
-              padding: 10,
-              color: "blue",
-              display: "inline-block",
-              cursor: "pointer",
-            }}
-          >
-            Home
-          </div>
-        </Link>
+const IndividualData = ({ data }) => {
+  return (
+    <div>
+      <Link href="/" className={styles.linkStyles}>
+        <div>Home</div>
+      </Link>
 
-        <Link style={{ margin: 10 }} href="/search">
-          <div
-            style={{
-              padding: 10,
-              color: "blue",
-              display: "inline-block",
-              cursor: "pointer",
-            }}
-          >
-            Search
-          </div>
-        </Link>
-        <h1>Hello World</h1>
-      </div>
-    );
-  }
-}
+      <Link
+        href={{ pathname: "/search/[search]", query: { search: data.title } }}
+        className={styles.linkStyles}
+      >
+        <div>Search</div>
+      </Link>
+      <h1>{data.title}</h1>
+    </div>
+  );
+};
+
+export default IndividualData;
