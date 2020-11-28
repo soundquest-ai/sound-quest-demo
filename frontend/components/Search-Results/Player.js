@@ -8,12 +8,6 @@ import {
 } from "react-soundplayer/components";
 import { withCustomAudio } from "react-soundplayer/addons";
 
-// audio source
-const streamUrl = "/api/v1/docs/2/file";
-
-// some track meta information
-const trackTitle = "Great song by random artist";
-
 const AWSSoundPlayer = withCustomAudio((props) => {
   const { trackTitle, currentTime, duration } = props;
 

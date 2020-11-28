@@ -6,17 +6,19 @@ import styles from "./renderData.module.css";
 const IndividualData = ({ data }) => {
   return (
     <div>
-      <Link href="/" className={styles.linkStyles}>
-        <div>Home</div>
-      </Link>
+      <div className={styles.linkStyles}>
+        <Link href="/">Home</Link>
+      </div>
 
-      <Link
-        href={{ pathname: "/search/[search]", query: { search: data.title } }}
-        className={styles.linkStyles}
-      >
-        <div>Search</div>
-      </Link>
-      <h1>{data.title}</h1>
+      <div className={styles.linkStyles}>
+        <Link
+          href={{ pathname: "/search/[search]", query: { search: data.title } }}
+        >
+          Search
+        </Link>
+      </div>
+      <h1 className={styles.title}>{data.title}</h1>
+      {/* <Player /> */}
     </div>
   );
 };

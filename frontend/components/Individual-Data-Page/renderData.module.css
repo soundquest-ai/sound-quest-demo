@@ -1,6 +1,19 @@
+/* LINKS */
+
 .linkStyles {
-  padding: 10;
-  color: "blue";
-  display: "inline-block";
-  cursor: "pointer";
+  padding: 1rem;
+  color: blue;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
 }
+
+/* END LINKS */
+
+/* HEADER */
+
+.title {
+  text-align: center;
+}
+
+/* END HEADER */
