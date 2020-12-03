@@ -1,3 +1,11 @@
+/* CONTAINER */
+
+.container {
+  width: 100%;
+}
+
+/* END CONTAINER */
+
 /* LINKS */
 
 .linkStyles {
@@ -17,3 +25,24 @@
 }
 
 /* END HEADER */
+
+/* DATA */
+.textContainer {
+  margin: 1rem 5rem;
+}
+
+.green {
+  color: green;
+  display: inline-block;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.red {
+  color: red;
+  display: inline-block;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+/* END DATA */

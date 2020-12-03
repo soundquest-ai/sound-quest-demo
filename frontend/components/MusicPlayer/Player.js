@@ -10,6 +10,7 @@ import { withCustomAudio } from "react-soundplayer/addons";
 
 const AWSSoundPlayer = withCustomAudio((props) => {
   const { trackTitle, currentTime, duration } = props;
+  // console.log(props.trackTime);
 
   return (
     <div className={styles.container}>
@@ -33,7 +34,8 @@ const AWSSoundPlayer = withCustomAudio((props) => {
 });
 
 export default function Player(props) {
-  const { document_id } = props;
+  // console.log(props.currentTime);
+  const { document_id, currentTime } = props;
   const docUrl = `/api/v1/docs/${document_id}`;
   const streamUrl = `/api/v1/docs/${document_id}/file`;
 
@@ -47,6 +49,7 @@ export default function Player(props) {
     <AWSSoundPlayer
       streamUrl={streamUrl}
       trackTitle={data.title}
+      // trackTime={currentTime}
       preloadType="auto"
     />
   );

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Layout from "../../components/Layout/Layout";
 import IndividualDocument from "../../components/Individual-Data-Page/RenderData";
 
 // This gets called on every request
@@ -17,9 +18,9 @@ export async function getServerSideProps(context) {
 
 const Document = ({ data }) => {
   return (
-    <div>
+    <Layout>
       <IndividualDocument data={data} />
-    </div>
+    </Layout>
   );
 };
 

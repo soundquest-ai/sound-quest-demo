@@ -1,5 +1,6 @@
 import Header from "../Header/Header";
 import Head from "next/head";
+import styles from "./layout.module.css";
 
 export default function Layout({ children }) {
   return (
@@ -8,7 +9,7 @@ export default function Layout({ children }) {
         <title>SoundQuest</title>
       </Head>
       <Header />
-      <main>{children}</main>
+      <main className={styles.container}>{children}</main>
     </div>
   );
 }

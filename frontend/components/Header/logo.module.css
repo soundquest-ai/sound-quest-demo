@@ -2,6 +2,7 @@
 .logoContainer {
   margin: 3rem auto 0;
   height: 10vh;
+  min-height: 80px;
   width: 97%;
   background-color: rgb(65, 168, 176);
   display: flex;
@@ -10,9 +11,8 @@
 }
 
 .logoImgContainer {
-  height: 6rem;
-  width: 20rem;
-  background-color: green;
+  padding: 0 5rem;
+  font-size: 3rem;
 }
 
 /* END LOGO */

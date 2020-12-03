@@ -1,16 +1,9 @@
 /* SEARCH SECTION */
-
-.searchContainer {
-  display: flex;
-  justify-content: center;
-  width: 97%;
-  height: 85vh;
-  margin: 0 auto;
-  background-color: #fefefe;
+.search {
+  width: 100%;
 }
 
 .searchMain {
-  flex-grow: 1;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 

@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./renderData.module.css";
 import Player from "../MusicPlayer/Player";
 
 const IndividualData = ({ data }) => {
+  const [time, setTime] = useState();
+  // console.log(time);
+  const formatedText = [];
+  data.words.map((item) => {
+    if (item.confidence > 0.9) {
+      formatedText.push(
+        <a
+          onClick={() => {
+            setTime(item.start_time);
+            // console.log(item.start_time);
+          }}
+          className={styles.green}
+        >
+          {item.word}
+        </a>
+      );
+    } else {
+      formatedText.push(
+        <a onClick={() => setTime(item.start_time)} className={styles.red}>
+          {item.word}
+        </a>
+      );
+    }
+  });
+
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.linkStyles}>
         <Link href="/">Home</Link>
       </div>
@@ -18,7 +43,13 @@ const IndividualData = ({ data }) => {
         </Link>
       </div>
       <h1 className={styles.title}>{data.title}</h1>
-      <Player document_id={data.document_id} />
+      <Player currentTime={time} document_id={data.document_id} />
+      <div className={styles.textContainer}>
+        Full text : {data.transcription.full_text}
+      </div>
+      <div className={styles.textContainer}>
+        Formatted by confidence : {formatedText}
+      </div>
     </div>
   );
 };

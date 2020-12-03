@@ -5,9 +5,16 @@ import Link from "next/link";
 
 export default function HomeSearch() {
   const [search, setSearch] = useState(null);
+  //const [isClicked, setIsClicked] = useState(false);
   function onChangeHandler(e) {
     setSearch(e.target.value);
   }
+
+  //function onKeyPress(e) {
+  //  if (e.key === "Enter") {
+  //    setIsClicked(true);
+  //  }
+  //}
 
   return (
     <div className={styles.searchContainer}>
@@ -21,7 +28,7 @@ export default function HomeSearch() {
         />
         <div className={styles.searchBtnContainer}>
           <button className={styles.searchBtn}>
-            <Link href={`/search/[search]`} as={`/search/${search}`}>
+            <Link href="/search/[search]" as={`/search/${search}`}>
               Go!
             </Link>
           </button>
