@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from "./home.module.css";
 import Link from "next/link";
@@ -10,11 +10,13 @@ export default function HomeSearch() {
     setSearch(e.target.value);
   }
 
-  //function onKeyPress(e) {
-  //  if (e.key === "Enter") {
-  //    setIsClicked(true);
-  //  }
-  //}
+  const handleKeyPress = (e) => {
+    //it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      console.log("enter");
+      document.getElementById("search").click();
+    }
+  };
 
   return (
     <div className={styles.searchContainer}>
@@ -25,13 +27,14 @@ export default function HomeSearch() {
           type="text"
           placeholder="Search SoundQuest"
           onChange={onChangeHandler}
+          onKeyDown={handleKeyPress}
         />
         <div className={styles.searchBtnContainer}>
-          <button className={styles.searchBtn}>
-            <Link href="/search/[search]" as={`/search/${search}`}>
+          <Link href="/search/[search]" as={`/search/${search}`}>
+            <button id="search" className={styles.searchBtn}>
               Go!
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
