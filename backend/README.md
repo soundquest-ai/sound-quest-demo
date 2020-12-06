@@ -2,13 +2,13 @@
 
 ## Backend local development
 
-* Start the stack with Docker Compose:
+- Start the stack with Docker Compose:
 
 ```bash
 docker-compose up -d
 ```
 
-* Now you can open your browser and interact with these URLs:
+- Now you can open your browser and interact with these URLs:
 
 Automatic interactive documentation with Swagger UI (from the OpenAPI backend): http://localhost:8888/docs
 
@@ -137,6 +137,7 @@ Start the stack with this command:
 ```Bash
 DOMAIN=backend sh ./scripts/test-local.sh
 ```
+
 The `./backend/app` directory is mounted as a "host volume" inside the docker container (set in the file `docker-compose.dev.volumes.yml`).
 You can rerun the test on live code:
 
@@ -213,7 +214,7 @@ you can copy that URL and modify the "host" to be `localhost` or the domain you 
 http://localhost:8888/token=f20939a41524d021fbfc62b31be8ea4dd9232913476f4397
 ```
 
- and then open it in your browser.
+and then open it in your browser.
 
 You will have a full Jupyter Notebook running inside your container that has direct access to your database by the container name (`db`), etc. So, you can just run sections of your backend code directly, for example with [VS Code Python Jupyter Interactive Window](https://code.visualstudio.com/docs/python/jupyter-support-py) or [Hydrogen](https://github.com/nteract/hydrogen).
 
@@ -223,23 +224,23 @@ As during local development your app directory is mounted as a volume inside the
 
 Make sure you create a "revision" of your models and that you "upgrade" your database with that revision every time you change them. As this is what will update the tables in your database. Otherwise, your application will have errors.
 
-* Start an interactive session in the backend container:
+- Start an interactive session in the backend container:
 
 ```console
 $ docker-compose exec backend bash
 ```
 
-* If you created a new model in `./backend/app/app/models/`, make sure to import it in `./backend/app/app/db/base.py`, that Python module (`base.py`) that imports all the models will be used by Alembic.
+- If you created a new model in `./backend/app/app/models/`, make sure to import it in `./backend/app/app/db/base.py`, that Python module (`base.py`) that imports all the models will be used by Alembic.
 
-* After changing a model (for example, adding a column), inside the container, create a revision, e.g.:
+- After changing a model (for example, adding a column), inside the container, create a revision, e.g.:
 
 ```console
 $ alembic revision --autogenerate -m "Add column last_name to User model"
 ```
 
-* Commit to the git repository the files generated in the alembic directory.
+- Commit to the git repository the files generated in the alembic directory.
 
-* After creating the revision, run the migration in the database (this is what will actually change the database):
+- After creating the revision, run the migration in the database (this is what will actually change the database):
 
 ```console
 $ alembic upgrade head
@@ -297,11 +298,12 @@ In that case, you will need to use a fake local domain (`dev.soundquest.com`) an
 
 If you used the default CORS enabled domains, `dev.soundquest.com` was configured to be allowed. If you want a custom one, you need to add it to the list in the variable `BACKEND_CORS_ORIGINS` in the `.env` file.
 
-* Open your `hosts` file with administrative privileges using a text editor:
-  * **Note for Windows**: If you are in Windows, open the main Windows menu, search for "notepad", right click on it, and select the option "open as Administrator" or similar. Then click the "File" menu, "Open file", go to the directory `c:\Windows\System32\Drivers\etc\`, select the option to show "All files" instead of only "Text (.txt) files", and open the `hosts` file.
-  * **Note for Mac and Linux**: Your `hosts` file is probably located at `/etc/hosts`, you can edit it in a terminal running `sudo nano /etc/hosts`.
+- Open your `hosts` file with administrative privileges using a text editor:
 
-* Additional to the contents it might have, add a new line with the custom IP (e.g. `192.168.99.150`) a space character, and your fake local domain: `dev.soundquest.com`.
+  - **Note for Windows**: If you are in Windows, open the main Windows menu, search for "notepad", right click on it, and select the option "open as Administrator" or similar. Then click the "File" menu, "Open file", go to the directory `c:\Windows\System32\Drivers\etc\`, select the option to show "All files" instead of only "Text (.txt) files", and open the `hosts` file.
+  - **Note for Mac and Linux**: Your `hosts` file is probably located at `/etc/hosts`, you can edit it in a terminal running `sudo nano /etc/hosts`.
+
+- Additional to the contents it might have, add a new line with the custom IP (e.g. `192.168.99.150`) a space character, and your fake local domain: `dev.soundquest.com`.
 
 The new line might look like:
 
@@ -309,8 +311,8 @@ The new line might look like:
 192.168.99.100    dev.soundquest.com
 ```
 
-* Save the file.
-  * **Note for Windows**: Make sure you save the file as "All files", without an extension of `.txt`. By default, Windows tries to add the extension. Make sure the file is saved as is, without extension.
+- Save the file.
+  - **Note for Windows**: Make sure you save the file as "All files", without an extension of `.txt`. By default, Windows tries to add the extension. Make sure the file is saved as is, without extension.
 
 ...that will make your computer think that the fake local domain is served by that custom IP, and when you open that URL in your browser, it will talk directly to your locally running server when it is asked to go to `dev.soundquest.com` and think that it is a remote server while it is actually running in your computer.
 
@@ -326,13 +328,13 @@ If you need to use your local stack with a different domain than `localhost`, yo
 
 To simplify your Docker Compose setup, for example, so that the API docs (Swagger UI) knows where is your API, you should let it know you are using that domain for development. You will need to edit 1 line in 2 files.
 
-* Open the file located at `./.env`. It would have a line like:
+- Open the file located at `./.env`. It would have a line like:
 
 ```
 DOMAIN=localhost
 ```
 
-* Change it to the domain you are going to use, e.g.:
+- Change it to the domain you are going to use, e.g.:
 
 ```
 DOMAIN=localhost.tiangolo.com
@@ -340,13 +342,13 @@ DOMAIN=localhost.tiangolo.com
 
 That variable will be used by the Docker Compose files.
 
-* Now open the file located at `./frontend/.env`. It would have a line like:
+- Now open the file located at `./frontend/.env`. It would have a line like:
 
 ```
 VUE_APP_DOMAIN_DEV=localhost
 ```
 
-* Change that line to the domain you are going to use, e.g.:
+- Change that line to the domain you are going to use, e.g.:
 
 ```
 VUE_APP_DOMAIN_DEV=localhost.tiangolo.com

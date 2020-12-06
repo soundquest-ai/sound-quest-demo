@@ -4,19 +4,19 @@ The frontend is a React app served by [next.js](https://nextjs.org/).
 
 ## Frontend local development
 
-* Start the backend stack with Docker Compose from the root of the repository:
+- Start the backend stack with Docker Compose from the root of the repository:
 
 ```bash
 docker-compose up -d
 ```
 
-* Start the frontend in local dev mode from this folder:
+- Start the frontend in local dev mode from this folder:
 
 ```bash
 npm run dev
 ```
 
-* The frontend runs on port 3000: [http://localhost:3000](http://localhost:3000)
+- The frontend runs on port 3000: [http://localhost:3000](http://localhost:3000)
 
 ## Backend proxy for local development
 

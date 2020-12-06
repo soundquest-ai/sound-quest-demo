@@ -49,11 +49,11 @@ STACK_NAME=stag-soundquest sh ./scripts/deploy.sh
 To use and expand that environment variable inside the `docker-compose.yml` files you can add the constraints to the services like:
 
 ```yaml
-version: '3'
+version: "3"
 services:
   db:
     volumes:
-      - 'app-db-data:/var/lib/postgresql/data/pgdata'
+      - "app-db-data:/var/lib/postgresql/data/pgdata"
     deploy:
       placement:
         constraints:
@@ -63,11 +63,11 @@ services:
 note the `${STACK_NAME?Variable not set}`. In the script `./scripts/deploy.sh`, the `docker-compose.yml` would be converted, and saved to a file `docker-stack.yml` containing:
 
 ```yaml
-version: '3'
+version: "3"
 services:
   db:
     volumes:
-      - 'app-db-data:/var/lib/postgresql/data/pgdata'
+      - "app-db-data:/var/lib/postgresql/data/pgdata"
     deploy:
       placement:
         constraints:
@@ -102,9 +102,9 @@ You can run that command every time you deploy, right before deploying, as it do
 
 If you don't want to use `docker-auto-labels` or for any reason you want to manually assign the constraint labels to specific nodes in your Docker Swarm mode cluster, you can do the following:
 
-* First, connect via SSH to your Docker Swarm mode cluster.
+- First, connect via SSH to your Docker Swarm mode cluster.
 
-* Then check the available nodes with:
+- Then check the available nodes with:
 
 ```console
 $ docker node ls
@@ -120,13 +120,13 @@ c4sdf2342asdfasd4234234ii     snake.example.com      Ready               Active 
 
 then chose a node from the list. For example, `dog.example.com`.
 
-* Add the label to that node. Use as label the name of the stack you are deploying followed by a dot (`.`) followed by the named volume, and as value, just `true`, e.g.:
+- Add the label to that node. Use as label the name of the stack you are deploying followed by a dot (`.`) followed by the named volume, and as value, just `true`, e.g.:
 
 ```bash
 docker node update --label-add soundquest.app-db-data=true dog.example.com
 ```
 
-* Then you need to do the same for each stack version you have. For example, for staging you could do:
+- Then you need to do the same for each stack version you have. For example, for staging you could do:
 
 ```bash
 docker node update --label-add stag-soundquest.app-db-data=true cat.example.com
@@ -146,10 +146,10 @@ Here are the steps in detail:
 
 1. **Build your app images**
 
-* Set these environment variables, right before the next command:
-  * `TAG=prod`
-  * `FRONTEND_ENV=production`
-* Use the provided `scripts/build.sh` file with those environment variables:
+- Set these environment variables, right before the next command:
+  - `TAG=prod`
+  - `FRONTEND_ENV=production`
+- Use the provided `scripts/build.sh` file with those environment variables:
 
 ```bash
 TAG=prod FRONTEND_ENV=production bash ./scripts/build.sh
@@ -161,10 +161,10 @@ TAG=prod FRONTEND_ENV=production bash ./scripts/build.sh
 
 If you are using a registry and pushing your images, you can omit running the previous script and instead using this one, in a single shot.
 
-* Set these environment variables:
-  * `TAG=prod`
-  * `FRONTEND_ENV=production`
-* Use the provided `scripts/build-push.sh` file with those environment variables:
+- Set these environment variables:
+  - `TAG=prod`
+  - `FRONTEND_ENV=production`
+- Use the provided `scripts/build-push.sh` file with those environment variables:
 
 ```bash
 TAG=prod FRONTEND_ENV=production bash ./scripts/build-push.sh
@@ -172,12 +172,12 @@ TAG=prod FRONTEND_ENV=production bash ./scripts/build-push.sh
 
 3. **Deploy your stack**
 
-* Set these environment variables:
-  * `DOMAIN=soundquest.com`
-  * `TRAEFIK_TAG=soundquest.com`
-  * `STACK_NAME=soundquest`
-  * `TAG=prod`
-* Use the provided `scripts/deploy.sh` file with those environment variables:
+- Set these environment variables:
+  - `DOMAIN=soundquest.com`
+  - `TRAEFIK_TAG=soundquest.com`
+  - `STACK_NAME=soundquest`
+  - `TAG=prod`
+- Use the provided `scripts/deploy.sh` file with those environment variables:
 
 ```bash
 DOMAIN=soundquest.com \
@@ -234,7 +234,7 @@ If you use any other CI / CD provider, you can base your deployment from that `.
 
 GitLab CI is configured assuming 2 environments following GitLab flow:
 
-* `prod` (production) from the `production` branch.
-* `stag` (staging) from the `master` branch.
+- `prod` (production) from the `production` branch.
+- `stag` (staging) from the `master` branch.
 
 If you need to add more environments, for example, you could imagine using a client-approved `preprod` branch, you can just copy the configurations in `.gitlab-ci.yml` for `stag` and rename the corresponding variables. The Docker Compose file and environment variables are configured to support as many environments as you need, so that you only need to modify `.gitlab-ci.yml` (or whichever CI system configuration you are using).

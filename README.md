@@ -2,18 +2,18 @@
 
 ## Requirements
 
-* [Docker](https://www.docker.com/).
-* [Docker Compose](https://docs.docker.com/compose/install/).
+- [Docker](https://www.docker.com/).
+- [Docker Compose](https://docs.docker.com/compose/install/).
 
 # Starting the backend
 
-* Start the backend stack with Docker Compose:
+- Start the backend stack with Docker Compose:
 
 ```bash
 docker-compose up -d
 ```
 
-* Now you can open your browser and interact with these URLs:
+- Now you can open your browser and interact with these URLs:
 
 Backend server: http://localhost:8888
 
@@ -49,7 +49,7 @@ to the backend path `<path>`. All routes starting with
 
 ## Frontend development
 
-* Enter the `frontend` directory, install the NPM packages and start the live server using the `npm` scripts:
+- Enter the `frontend` directory, install the NPM packages and start the live server using the `npm` scripts:
 
 ```bash
 cd frontend
@@ -62,7 +62,6 @@ Then open your browser at http://localhost:3000
 Notice that this live server is not running inside Docker, it is for local development, and that is the recommended workflow. Once you are happy with your frontend, you can build the frontend Docker image and start it, to test it in a production-like environment. But compiling the image at every change will not be as productive as running the local development server with live reload.
 
 Check the file `package.json` to see other available options.
-
 
 ## Docker Compose files and env vars
 
@@ -123,7 +122,6 @@ Automatic Alternative Docs (ReDoc): https://stag.soundquest.com/redoc
 PGAdmin: https://pgadmin.stag.soundquest.com
 
 Flower: https://flower.stag.soundquest.com
-
 
 ### Development with Docker Toolbox URLs
 

@@ -1,30 +1,36 @@
 default_context:
-  project_name: 'soundquest'
-  project_slug: 'soundquest'
-  domain_main: 'soundquest.com'
-  domain_staging: 'stag.soundquest.com'
-  docker_swarm_stack_name_main: 'soundquest'
-  docker_swarm_stack_name_staging: 'stag-soundquest'
-  secret_key: '1d94b380e6920ba5b54c23f71c55ab6bf79ad40864bea035b45d80d2f87e35b6'
-  first_superuser: 'admin@soundquest.com'
-  first_superuser_password: 'an1gie12'
+  project_name: "soundquest"
+  project_slug: "soundquest"
+  domain_main: "soundquest.com"
+  domain_staging: "stag.soundquest.com"
+  docker_swarm_stack_name_main: "soundquest"
+  docker_swarm_stack_name_staging: "stag-soundquest"
+  secret_key: "1d94b380e6920ba5b54c23f71c55ab6bf79ad40864bea035b45d80d2f87e35b6"
+  first_superuser: "admin@soundquest.com"
+  first_superuser_password: "an1gie12"
   backend_cors_origins: '["http://localhost", "http://localhost:4200", "http://localhost:3000", "http://localhost:8080", "https://localhost", "https://localhost:4200", "https://localhost:3000", "https://localhost:8080", "http://dev.soundquest.com", "https://stag.soundquest.com", "https://soundquest.com", "http://local.dockertoolbox.tiangolo.com", "http://localhost.tiangolo.com"]'
-  smtp_port: '587'
-  smtp_host: ''
-  smtp_user: ''
-  smtp_password: ''
-  smtp_emails_from_email: 'info@soundquest.com'
-  postgres_password: '9a0b7dec7f86fab49adaec5e2820a9ef54165d153ddbb67f9e23765efb68e4f2'
-  pgadmin_default_user: 'admin'
-  pgadmin_default_user_password: 'a3b8ef86b0221fd3df0d69ee25e3d2e586c1c06c4a9810d12f877f58085e46ed'
-  traefik_constraint_tag: 'soundquest.com'
-  traefik_constraint_tag_staging: 'stag.soundquest.com'
-  traefik_public_constraint_tag: 'traefik-public'
-  flower_auth: 'admin:an1gie12'
-  sentry_dsn: ''
-  docker_image_prefix: 'soundquest-backend'
-  docker_image_backend: 'soundquest-backend'
-  docker_image_celeryworker: 'soundquest-backendceleryworker'
-  docker_image_frontend: 'soundquest-frontend'
-  _copy_without_render: [frontend/src/**/*.html, frontend/src/**/*.vue, frontend/node_modules/*, backend/app/app/email-templates/**]
+  smtp_port: "587"
+  smtp_host: ""
+  smtp_user: ""
+  smtp_password: ""
+  smtp_emails_from_email: "info@soundquest.com"
+  postgres_password: "9a0b7dec7f86fab49adaec5e2820a9ef54165d153ddbb67f9e23765efb68e4f2"
+  pgadmin_default_user: "admin"
+  pgadmin_default_user_password: "a3b8ef86b0221fd3df0d69ee25e3d2e586c1c06c4a9810d12f877f58085e46ed"
+  traefik_constraint_tag: "soundquest.com"
+  traefik_constraint_tag_staging: "stag.soundquest.com"
+  traefik_public_constraint_tag: "traefik-public"
+  flower_auth: "admin:an1gie12"
+  sentry_dsn: ""
+  docker_image_prefix: "soundquest-backend"
+  docker_image_backend: "soundquest-backend"
+  docker_image_celeryworker: "soundquest-backendceleryworker"
+  docker_image_frontend: "soundquest-frontend"
+  _copy_without_render:
+    [
+      frontend/src/**/*.html,
+      frontend/src/**/*.vue,
+      frontend/node_modules/*,
+      backend/app/app/email-templates/**,
+    ]
   _template: ./

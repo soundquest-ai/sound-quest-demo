@@ -29,19 +29,19 @@ const IndividualData = ({ data }) => {
     }
   });
 
-    let transcript_element = <div> </div>
-    if (data.transcription) {
-        transcript_element = (
-            <div>
-            <div className={styles.textContainer}>
-            Full text : {data.transcription.full_text}
+  let transcript_element = <div> </div>;
+  if (data.transcription) {
+    transcript_element = (
+      <div>
+        <div className={styles.textContainer}>
+          Full text : {data.transcription.full_text}
         </div>
-            <div className={styles.textContainer}>
-            Formatted by confidence : {formatedText}
+        <div className={styles.textContainer}>
+          Formatted by confidence : {formatedText}
         </div>
-                </div>
-        )
-    }
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -51,14 +51,17 @@ const IndividualData = ({ data }) => {
 
       <div className={styles.linkStyles}>
         <Link
-          href={{ pathname: "/search/", query: { title: encodeURI(data.title) } }}
+          href={{
+            pathname: "/search/",
+            query: { title: encodeURI(data.title) },
+          }}
         >
           Search
         </Link>
       </div>
       <h1 className={styles.title}>{data.title}</h1>
-          <Player currentTime={time} document_id={data.document_id} />
-          {transcript_element}
+      <Player currentTime={time} document_id={data.document_id} />
+      {transcript_element}
     </div>
   );
 };
