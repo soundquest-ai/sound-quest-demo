@@ -4,6 +4,7 @@ import styles from "./renderData.module.css";
 import Player from "../MusicPlayer/Player";
 
 const IndividualData = ({ data }) => {
+  console.log(data);
   const [time, setTime] = useState();
   // console.log(time);
   const formatedText = [];
