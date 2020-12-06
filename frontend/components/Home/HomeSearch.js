@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 import styles from "./home.module.css";
 import Link from "next/link";
 
 export default function HomeSearch() {
   const [search, setSearch] = useState(null);
-  //const [isClicked, setIsClicked] = useState(false);
+
   function onChangeHandler(e) {
     setSearch(e.target.value);
   }
@@ -13,7 +12,6 @@ export default function HomeSearch() {
   const handleKeyPress = (e) => {
     //it triggers by pressing the enter key
     if (e.keyCode === 13) {
-      console.log("enter");
       document.getElementById("search").click();
     }
   };
@@ -30,7 +28,7 @@ export default function HomeSearch() {
           onKeyDown={handleKeyPress}
         />
         <div className={styles.searchBtnContainer}>
-          <Link href="/search/[search]" as={`/search/${search}`}>
+          <Link href={`/search?title=${search}`}>
             <button id="search" className={styles.searchBtn}>
               Go!
             </button>
