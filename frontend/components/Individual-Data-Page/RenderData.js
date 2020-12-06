@@ -4,6 +4,7 @@ import styles from "./renderData.module.css";
 import Player from "../MusicPlayer/Player";
 
 const IndividualData = ({ data }) => {
+  console.log(data);
   const [time, setTime] = useState();
   // console.log(time);
   const formatedText = [];
@@ -36,9 +37,7 @@ const IndividualData = ({ data }) => {
       </div>
 
       <div className={styles.linkStyles}>
-        <Link
-          href={{ pathname: "/search/[search]", query: { search: data.title } }}
-        >
+        <Link href={{ pathname: "/search", query: { title: data.title } }}>
           Search
         </Link>
       </div>

@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./searchResult.module.css";
 import RenderData from "./RenderData";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 
-export default function SearchResult() {
+function SearchResult() {
   const Router = useRouter();
   console.log(Router.query.title);
-
+  /**
+   *! the problem is Router.query.title comes up as undefined and then defines, this will only show if you edit title in the url, aparty from that the functionallity works
+   *! I was looking at getInitialProps to fix this, but my solutions didnt work out
+   */
   const [search, setSearch] = useState(Router.query.title);
   const [value, setValue] = useState(Router.query.title);
 
@@ -56,3 +59,10 @@ export default function SearchResult() {
     </form>
   );
 }
+
+SearchResult.getInitialProps = async (context) => {
+  console.log(context.query);
+  return { Router };
+};
+
+export default SearchResult;
