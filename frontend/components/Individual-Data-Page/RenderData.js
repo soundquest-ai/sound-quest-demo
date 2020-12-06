@@ -37,7 +37,7 @@ const IndividualData = ({ data }) => {
 
       <div className={styles.linkStyles}>
         <Link
-          href={{ pathname: "/search/[search]", query: { search: data.title } }}
+          href={{ pathname: "/search/", query: { title: encodeURI(data.title) } }}
         >
           Search
         </Link>
