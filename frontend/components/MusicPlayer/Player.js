@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import styles from "./player.module.css";
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
 
 export default function Player(props) {
   // console.log(props.currentTime);
@@ -14,8 +14,14 @@ export default function Player(props) {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
-    return (
-            <ReactPlayer url={streamUrl} controls={true}
-    />
+  return (
+    <div className={styles.container}>
+      <ReactPlayer
+        url={streamUrl}
+        controls={true}
+        height={styles.height}
+        width={styles.width}
+      />
+    </div>
   );
 }

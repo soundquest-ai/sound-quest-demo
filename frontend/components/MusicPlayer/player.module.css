@@ -1,3 +1,14 @@
+.width {
+  width: 100%;
+}
+
+.height {
+  height: 5rem;
+  padding: 2rem;
+}
+
+/* old player */
+
 .container {
   flex-grow: 1;
   padding: 1rem;
@@ -7,15 +18,15 @@
   justify-content: space-evenly;
 }
 
-.title {
+/*.title {
   flex-grow: 5;
   width: 100%;
   text-align: center;
   margin: 1rem auto;
-}
+}*/
 /* PLAYER */
 
-.playBtn {
+/*.playBtn {
   height: 5rem;
   width: 5rem;
   padding: 1.5rem;
@@ -24,11 +35,11 @@
   border: 0.1rem solid #fc561e;
   background-color: #fefefe;
   outline: none;
-}
+}*/
 
 /* PROGRESS */
 
-.progress {
+/*.progress {
   background-color: #eee;
   border-radius: 5px;
   width: 70%;
@@ -42,15 +53,15 @@
   height: 100%;
   -webkit-transition: width 0.2s ease-in;
   transition: width 0.2s ease-in;
-}
+}*/
 
 /* TIMER */
-.timer {
+/*.timer {
   color: #fc561e;
-}
+}*/
 
 /* VOLUME */
-.volumeControl {
+/*.volumeControl {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,4 +95,4 @@
 
 .volumeControl:hover .rangeVolumeControl {
   transform: translateY(1000%);
-}
+}*/

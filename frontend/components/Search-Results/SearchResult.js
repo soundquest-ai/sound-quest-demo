@@ -2,18 +2,30 @@ import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./searchResult.module.css";
 import RenderData from "./RenderData";
+import { useRouter } from "next/router";
 
-export default function SearchResult(props) {
-  const [search, setSearch] = useState(props.search);
-  const [value, setValue] = useState(props.search);
+export default function SearchResult() {
+  const Router = useRouter();
+  console.log(Router.query.title);
+
+  const [search, setSearch] = useState(Router.query.title);
+  const [value, setValue] = useState(Router.query.title);
+
+  const updateQuery = (newQuery) => {
+    Router.push({
+      pathname: "/search",
+      query: { title: encodeURI(newQuery) },
+    });
+  };
 
   function handleChange(e) {
     setSearch(e.target.value);
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     event.preventDefault();
     setValue(search);
+    updateQuery(search);
   }
 
   return (
