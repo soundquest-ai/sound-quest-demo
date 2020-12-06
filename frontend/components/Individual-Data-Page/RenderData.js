@@ -29,6 +29,20 @@ const IndividualData = ({ data }) => {
     }
   });
 
+    let transcript_element = <div> </div>
+    if (data.transcription) {
+        transcript_element = (
+            <div>
+            <div className={styles.textContainer}>
+            Full text : {data.transcription.full_text}
+        </div>
+            <div className={styles.textContainer}>
+            Formatted by confidence : {formatedText}
+        </div>
+                </div>
+        )
+    }
+
   return (
     <div className={styles.container}>
       <div className={styles.linkStyles}>
@@ -43,13 +57,8 @@ const IndividualData = ({ data }) => {
         </Link>
       </div>
       <h1 className={styles.title}>{data.title}</h1>
-      <Player currentTime={time} document_id={data.document_id} />
-      <div className={styles.textContainer}>
-        Full text : {data.transcription.full_text}
-      </div>
-      <div className={styles.textContainer}>
-        Formatted by confidence : {formatedText}
-      </div>
+          <Player currentTime={time} document_id={data.document_id} />
+          {transcript_element}
     </div>
   );
 };
