@@ -2,16 +2,16 @@
 
 ## Requirements
 
-- [Docker](https://www.docker.com/).
-- [Docker Compose](https://docs.docker.com/compose/install/).
+- [Docker](https://www.docker.com/). [Docker
+- Compose](https://docs.docker.com/compose/install/).
 
-# Starting the backend
+# Dev Setup
+
+## Starting the backend
 
 - Start the backend stack with Docker Compose:
 
-```bash
-docker-compose up -d
-```
+`bash docker-compose up -d `
 
 - Now you can open your browser and interact with these URLs:
 
@@ -19,7 +19,25 @@ Backend server: http://localhost:8888
 
 For example, the backend api documentation: http://localhost:8888/docs
 
-### Development URLs
+## Starting the frontend in development mode
+
+- Enter the `frontend` directory, install the NPM packages and start
+  the live server using the `npm` scripts:
+
+`bash cd frontend npm install npm run dev `
+
+Then open your browser at http://localhost:3000
+
+Notice that this live server is not running inside Docker, it is for
+local development, and that is the recommended workflow. Once you are
+happy with your frontend, you can build the frontend Docker image and
+start it, to test it in a production-like environment. But compiling
+the image at every change will not be as productive as running the
+local development server with live reload.
+
+Check the file `package.json` to see other available options.
+
+## Development URLs
 
 Development URLs, for local development.
 
@@ -37,7 +55,7 @@ Flower: `http://localhost:5555`
 
 Traefik UI: `http://localhost:8090`
 
-### Development frontend proxy
+## Development frontend proxy
 
 In development mode, the frontend also acts as a proxy to the backend
 server. Paths `http://localhost:3000/backend/<path>` will be forwarded
@@ -47,51 +65,64 @@ to the backend path `<path>`. All routes starting with
 `http://localhost:3000/backend/docs` (mapping to
 `http://localhost:8888/docs`).
 
-## Frontend development
-
-- Enter the `frontend` directory, install the NPM packages and start the live server using the `npm` scripts:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Then open your browser at http://localhost:3000
-
-Notice that this live server is not running inside Docker, it is for local development, and that is the recommended workflow. Once you are happy with your frontend, you can build the frontend Docker image and start it, to test it in a production-like environment. But compiling the image at every change will not be as productive as running the local development server with live reload.
-
-Check the file `package.json` to see other available options.
+# About the docker compose setup in general
 
 ## Docker Compose files and env vars
 
-There is a main `docker-compose.yml` file with all the configurations that apply to the whole stack, it is used automatically by `docker-compose`.
+There is a main `docker-compose.yml` file with all the configurations
+that apply to the whole stack, it is used automatically by
+`docker-compose`.
 
-And there's also a `docker-compose.override.yml` with overrides for development, for example to mount the source code as a volume. It is used automatically by `docker-compose` to apply overrides on top of `docker-compose.yml`.
+And there's also a `docker-compose.override.yml` with overrides for
+development, for example to mount the source code as a volume. It is
+used automatically by `docker-compose` to apply overrides on top of
+`docker-compose.yml`.
 
-These Docker Compose files use the `.env` file containing configurations to be injected as environment variables in the containers.
+These Docker Compose files use the `.env` file containing
+configurations to be injected as environment variables in the
+containers.
 
-They also use some additional configurations taken from environment variables set in the scripts before calling the `docker-compose` command.
+They also use some additional configurations taken from environment
+variables set in the scripts before calling the `docker-compose`
+command.
 
-It is all designed to support several "stages", like development, building, testing, and deployment. Also, allowing the deployment to different environments like staging and production (and you can add more environments very easily).
+It is all designed to support several "stages", like development,
+building, testing, and deployment. Also, allowing the deployment to
+different environments like staging and production (and you can add
+more environments very easily).
 
-They are designed to have the minimum repetition of code and configurations, so that if you need to change something, you have to change it in the minimum amount of places. That's why files use environment variables that get auto-expanded. That way, if for example, you want to use a different domain, you can call the `docker-compose` command with a different `DOMAIN` environment variable instead of having to change the domain in several places inside the Docker Compose files.
+They are designed to have the minimum repetition of code and
+configurations, so that if you need to change something, you have to
+change it in the minimum amount of places. That's why files use
+environment variables that get auto-expanded. That way, if for
+example, you want to use a different domain, you can call the
+`docker-compose` command with a different `DOMAIN` environment
+variable instead of having to change the domain in several places
+inside the Docker Compose files.
 
-Also, if you want to have another deployment environment, say `preprod`, you just have to change environment variables, but you can keep using the same Docker Compose files.
+Also, if you want to have another deployment environment, say
+`preprod`, you just have to change environment variables, but you can
+keep using the same Docker Compose files.
 
 ### The .env file
 
-The `.env` file is the one that contains all your configurations, generated keys and passwords, etc.
+The `.env` file is the one that contains all your configurations,
+generated keys and passwords, etc.
 
-Depending on your workflow, you could want to exclude it from Git, for example if your project is public. In that case, you would have to make sure to set up a way for your CI tools to obtain it while building or deploying your project.
+Depending on your workflow, you could want to exclude it from Git, for
+example if your project is public. In that case, you would have to
+make sure to set up a way for your CI tools to obtain it while
+building or deploying your project.
 
-One way to do it could be to add each environment variable to your CI/CD system, and updating the `docker-compose.yml` file to read that specific env var instead of reading the `.env` file.
+One way to do it could be to add each environment variable to your
+CI/CD system, and updating the `docker-compose.yml` file to read that
+specific env var instead of reading the `.env` file.
 
-## URLs
+# URLs
 
 These are the URLs that will be used and generated by the project.
 
-### Production URLs
+## Production URLs (future work)
 
 Production URLs, from the branch `production`.
 
@@ -106,73 +137,3 @@ Automatic Alternative Docs (ReDoc): https://soundquest.com/redoc
 PGAdmin: https://pgadmin.soundquest.com
 
 Flower: https://flower.soundquest.com
-
-### Staging URLs
-
-Staging URLs, from the branch `master`.
-
-Frontend: https://stag.soundquest.com
-
-Backend: https://stag.soundquest.com/api/
-
-Automatic Interactive Docs (Swagger UI): https://stag.soundquest.com/docs
-
-Automatic Alternative Docs (ReDoc): https://stag.soundquest.com/redoc
-
-PGAdmin: https://pgadmin.stag.soundquest.com
-
-Flower: https://flower.stag.soundquest.com
-
-### Development with Docker Toolbox URLs
-
-Development URLs, for local development.
-
-Frontend: http://local.dockertoolbox.tiangolo.com
-
-Backend: http://local.dockertoolbox.tiangolo.com/api/
-
-Automatic Interactive Docs (Swagger UI): https://local.dockertoolbox.tiangolo.com/docs
-
-Automatic Alternative Docs (ReDoc): https://local.dockertoolbox.tiangolo.com/redoc
-
-PGAdmin: http://local.dockertoolbox.tiangolo.com:5050
-
-Flower: http://local.dockertoolbox.tiangolo.com:5555
-
-Traefik UI: http://local.dockertoolbox.tiangolo.com:8090
-
-### Development with a custom IP URLs
-
-Development URLs, for local development.
-
-Frontend: http://dev.soundquest.com
-
-Backend: http://dev.soundquest.com/api/
-
-Automatic Interactive Docs (Swagger UI): https://dev.soundquest.com/docs
-
-Automatic Alternative Docs (ReDoc): https://dev.soundquest.com/redoc
-
-PGAdmin: http://dev.soundquest.com:5050
-
-Flower: http://dev.soundquest.com:5555
-
-Traefik UI: http://dev.soundquest.com:8090
-
-### Development in localhost with a custom domain URLs
-
-Development URLs, for local development.
-
-Frontend: http://localhost.tiangolo.com
-
-Backend: http://localhost.tiangolo.com/api/
-
-Automatic Interactive Docs (Swagger UI): https://localhost.tiangolo.com/docs
-
-Automatic Alternative Docs (ReDoc): https://localhost.tiangolo.com/redoc
-
-PGAdmin: http://localhost.tiangolo.com:5050
-
-Flower: http://localhost.tiangolo.com:5555
-
-Traefik UI: http://localhost.tiangolo.com:8090
