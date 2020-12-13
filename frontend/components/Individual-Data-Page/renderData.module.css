@@ -27,12 +27,24 @@
 /* END HEADER */
 
 /* DATA */
-.textContainer {
-  margin: 1rem 5rem;
+.dataContainer {
+  width: 95%;
+  height: 50%;
+  margin: 2rem auto;
+  border: 2px groove black;
+  overflow: scroll;
 }
 
-.green {
-  color: green;
+.dataLeft,
+.dataRight {
+  display: inline-block;
+  padding: 1rem;
+  width: 50%;
+  /*border: 1px solid black;*/
+  vertical-align: top;
+}
+
+.black {
   display: inline-block;
   padding: 0.2rem;
   cursor: pointer;

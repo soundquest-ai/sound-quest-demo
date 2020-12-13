@@ -1,6 +1,7 @@
 .container {
   display: flex;
   justify-content: center;
+  overflow: scroll;
   width: 97%;
   height: 85vh;
   min-height: 450px;

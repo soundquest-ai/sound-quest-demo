@@ -4,9 +4,8 @@ import styles from "./renderData.module.css";
 import Player from "../MusicPlayer/Player";
 
 const IndividualData = ({ data }) => {
-  console.log(data);
   const [time, setTime] = useState();
-  // console.log(time);
+  console.log("time", time);
   const formatedText = [];
   data.words.map((item) => {
     if (item.confidence > 0.9) {
@@ -14,9 +13,8 @@ const IndividualData = ({ data }) => {
         <a
           onClick={() => {
             setTime(item.start_time);
-            // console.log(item.start_time);
           }}
-          className={styles.green}
+          className={styles.black}
         >
           {item.word}
         </a>
@@ -34,9 +32,6 @@ const IndividualData = ({ data }) => {
   if (data.transcription) {
     transcript_element = (
       <div>
-        <div className={styles.textContainer}>
-          Full text : {data.transcription.full_text}
-        </div>
         <div className={styles.textContainer}>
           Formatted by confidence : {formatedText}
         </div>
@@ -62,7 +57,12 @@ const IndividualData = ({ data }) => {
       </div>
       <h1 className={styles.title}>{data.title}</h1>
       <Player currentTime={time} document_id={data.document_id} />
-      {transcript_element}
+      <div className={styles.dataContainer}>
+        <div className={styles.dataLeft}>
+          <h1>page info</h1>
+        </div>
+        <div className={styles.dataRight}>{transcript_element}</div>
+      </div>
     </div>
   );
 };

@@ -31,7 +31,7 @@ function DisplayData(props) {
   const date = new Date();
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.dataInfo}>
         <h3>
           <Link
             href={{
