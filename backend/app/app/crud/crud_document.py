@@ -9,12 +9,12 @@ from app.schemas.document import DocumentCreate, DocumentUpdate
 
 
 class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
-    def get_all_by_title(
-        self, db: Session, *, title: str, skip: int = 0, limit: int = 100
+    def filter_document(
+        self, db: Session, *, filter_str: str, skip: int = 0, limit: int = 100
     ) -> List[Document]:
         return (
             db.query(Document)
-            .filter(Document.title.contains(title))
+            .filter(Document.fulltext_search_vector.match(filter_str))
             .offset(skip)
             .limit(limit)
             .all()

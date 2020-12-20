@@ -31,5 +31,7 @@ def get_filtered_documents(
     """
     Retrieve documents.
     """
-    documents = crud.document.get_all_by_title(db, skip=skip, limit=limit, title=filter)
+    documents = crud.document.filter_document(
+        db, skip=skip, limit=limit, filter_str=filter
+    )
     return documents
