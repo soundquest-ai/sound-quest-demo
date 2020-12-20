@@ -33,8 +33,8 @@ class DocumentUpdate(DocumentBase):
 class DocumentInDBBase(DocumentBase):
     id: Optional[int] = None
     filename: Optional[str]
-    transcription: Optional[AWSTranscription]
     words: List[Word] = []
+    fulltext: Optional[str]
 
     class Config:
         orm_mode = True
