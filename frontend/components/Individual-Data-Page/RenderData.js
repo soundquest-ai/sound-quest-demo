@@ -29,7 +29,7 @@ const IndividualData = ({ data }) => {
   });
 
   let transcript_element = <div> </div>;
-  if (data.transcription) {
+  if (formatedText.length > 0) {
     transcript_element = (
       <div>
         <div className={styles.textContainer}>
