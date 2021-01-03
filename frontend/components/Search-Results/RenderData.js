@@ -17,10 +17,11 @@ export default function RenderData(props) {
       <></>
     ) : (
       <DisplayData
-        key={item.id}
-        title={item.title}
-        document_id={item.id}
-        words={item.words.length}
+        key={item.document.id}
+        title={item.document.title}
+        document_id={item.document.id}
+        words={item.document.words.length}
+        headline={item.headline}
       />
     )
   );
@@ -43,6 +44,7 @@ function DisplayData(props) {
           </Link>
         </h3>
         <p>Number of words: {props.words}</p>
+        <p>{props.headline}</p>
       </div>
       <Player document_id={props.document_id} />
     </div>

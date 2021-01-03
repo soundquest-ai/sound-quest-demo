@@ -11,6 +11,7 @@ from fastapi import APIRouter, File, UploadFile, Depends, HTTPException
 from fastapi.responses import FileResponse
 
 from app import crud, models, schemas
+from app.schemas.document import FilteredDocument
 from app.api import deps
 from app.core.config import settings
 from app.utils import send_new_account_email
@@ -21,13 +22,13 @@ router = APIRouter()
 LOG = logging.getLogger(__name__)
 
 
-@router.get("/", response_model=List[schemas.Document])
+@router.get("/", response_model=List[FilteredDocument])
 def get_filtered_documents(
     filter: str,
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(deps.get_db),
-) -> List[schemas.Document]:
+) -> List[FilteredDocument]:
     """
     Retrieve documents.
     """

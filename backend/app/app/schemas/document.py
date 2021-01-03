@@ -60,3 +60,10 @@ class Document(DocumentInDBBase):
 # Additional properties stored in DB
 class DocumentInDB(DocumentInDBBase):
     pass
+
+
+class FilteredDocument(BaseModel):
+    """Model for returned by the filter_document"""
+
+    document: Document
+    headline: str
