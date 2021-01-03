@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, List
 
-from sqlalchemy import func
+from sqlalchemy import func, text
 from sqlalchemy.orm import Session
 
 
@@ -15,7 +15,13 @@ class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
         self, db: Session, *, filter_str: str, skip: int = 0, limit: int = 100
     ) -> List[Document]:
 
-        ts_query = func.websearch_to_tsquery(Document.fulltext_regconfig, filter_str)
+        # construct the query operand for the full test search. Use
+        # the regconfig of the table column. We need to cast it to
+        # regconfig, which seems to not be possible in sqlalchemy, so
+        # construct the term as text.
+        ts_query = func.websearch_to_tsquery(
+            text("fulltext_regconfig::regconfig"), filter_str
+        )
 
         # func.ts_headline(Document.fulltext_regconfig,
         # ts_query,

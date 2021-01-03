@@ -8,8 +8,16 @@ from sqlalchemy import func
 from app import crud
 from app.api import deps
 from app.transcription import aws
+from app.schemas.document import Language
 
 from ..router import router
+
+language_to_regconfig = {
+    Language.de_DE: "german",
+    Language.en_GB: "english",
+    Language.en_US: "english",
+    Language.es_ES: "spanish",
+}
 
 
 @router.post("/{document_id}/transcribe/aws")  # , response_model=schemas.Document
@@ -31,6 +39,10 @@ def transcribe_with_aws(
 
     document.fulltext = document.transcription.full_text
     document.fulltext_search_vector = func.to_tsvector(document.transcription.full_text)
+    document.fulltext_regconfig = language_to_regconfig.get(Language(document.language))
+
+    if not document.fulltext_regconfig:
+        raise ValueError(f"Not regconfig known for language {document.language}.")
 
     db.commit()
     db.refresh(document)
