@@ -44,8 +44,9 @@ class DocumentUpdate(DocumentBase):
 class DocumentInDBBase(DocumentBase):
     id: Optional[int] = None
     filename: Optional[str]
-    words: List[Word] = []
     fulltext: Optional[str]
+    fulltext_regconfig: Optional[str]
+    words: List[Word] = []
 
     class Config:
         orm_mode = True
