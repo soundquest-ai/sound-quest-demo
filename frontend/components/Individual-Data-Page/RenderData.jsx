@@ -4,12 +4,36 @@ import Link from "next/link";
 import styles from "./renderData.module.css";
 import Player from "../MusicPlayer/Player";
 
-const RenderData = ({ data }) => {
+const RenderData = ({ query }) => {
+  const { document_id } = query;
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const { data, error } = useSWR(
+    `http://localhost:8888/api/v1/docs/${document_id}`,
+    fetcher
+  );
+
   console.log(data);
-  const [time, setTime] = useState();
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
+  const dataComponents = (
+    <DisplayData
+      key={data.id}
+      title={data.title}
+      document_id={data.id}
+      words={data.words}
+      transcription={data.transcription}
+    />
+  );
+
+  return <div>{dataComponents}</div>;
+};
+
+const DisplayData = ({ title, document_id, words, transcription }) => {
+  const [time, setTime] = useState(null);
   console.log("time", time);
   const formatedText = [];
-  data.words.map((item) => {
+  words.map((item) => {
     if (item.confidence > 0.9) {
       formatedText.push(
         <a
@@ -31,7 +55,7 @@ const RenderData = ({ data }) => {
   });
 
   let transcript_element = <div> </div>;
-  if (data.transcription) {
+  if (transcription) {
     transcript_element = (
       <div>
         <div className={styles.textContainer}>
@@ -51,14 +75,14 @@ const RenderData = ({ data }) => {
         <Link
           href={{
             pathname: "/search/",
-            query: { title: encodeURI(data.title) },
+            query: { title: encodeURI(title) },
           }}
         >
           Search
         </Link>
       </div>
-      <h1 className={styles.title}>{data.title}</h1>
-      <Player document_id={data.document_id} />
+      <h1 className={styles.title}>{title}</h1>
+      <Player document_id={document_id} />
       <div className={styles.dataContainer}>
         <div className={styles.dataLeft}>
           <h1>page info</h1>
