@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import useSWR from "swr";
 import Link from "next/link";
 import styles from "./renderData.module.css";
 import Player from "../MusicPlayer/Player";
 
-const IndividualData = ({ data }) => {
+const RenderData = ({ data }) => {
+  console.log(data);
   const [time, setTime] = useState();
   console.log("time", time);
   const formatedText = [];
@@ -56,7 +58,7 @@ const IndividualData = ({ data }) => {
         </Link>
       </div>
       <h1 className={styles.title}>{data.title}</h1>
-      <Player currentTime={time} document_id={data.document_id} />
+      <Player document_id={data.document_id} />
       <div className={styles.dataContainer}>
         <div className={styles.dataLeft}>
           <h1>page info</h1>
@@ -67,4 +69,4 @@ const IndividualData = ({ data }) => {
   );
 };
 
-export default IndividualData;
+export default RenderData;
