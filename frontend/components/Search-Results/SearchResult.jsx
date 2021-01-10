@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter, Router } from "next/router";
 
 import RenderData from "./RenderData";
@@ -8,7 +7,8 @@ import styles from "./searchResult.module.css";
 
 const SearchResult = () => {
   const Router = useRouter();
-  const { searchContainer, searchMain, searchBtn, searchInput, link } = styles;
+
+  const { searchContainer, searchMain, searchBtn, searchInput } = styles;
 
   const [search, setSearch] = useState(Router.query.title);
   const [value, setValue] = useState(Router.query.title);
@@ -33,9 +33,6 @@ const SearchResult = () => {
   return (
     <form onSubmit={handleSubmit} className={searchContainer}>
       <div className={searchMain}>
-        <Link href="/">
-          <div className={link}>Home</div>
-        </Link>
         <input
           className={searchInput}
           type="text"

@@ -1,17 +1,20 @@
-import Header from "../Header/Header";
 import Head from "next/head";
+
+import Nav from "../Nav/Nav";
+
 import styles from "./layout.module.css";
 
 const Layout = ({ children }) => {
-  const { container } = styles;
+  const { mainContainer, container } = styles;
+
   return (
-    <div>
+    <main className={mainContainer}>
       <Head>
         <title>SoundQuest</title>
       </Head>
-      <Header />
-      <main className={container}>{children}</main>
-    </div>
+      <Nav />
+      <section className={container}>{children}</section>
+    </main>
   );
 };
 

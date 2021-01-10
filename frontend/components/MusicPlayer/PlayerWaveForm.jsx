@@ -1,14 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import WaveSurfer from "wavesurfer.js";
+//import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js";
+//import MinimapPlugin from "wavesurfer.js/dist/plugin/wavesurfer.minimap.min.js";
 import styles from "./waveform.module.css";
 
 const formWaveSurferOptions = (ref) => ({
   container: ref,
-  waveColor: "#eee",
-  progressColor: "OrangeRed",
-  cursorColor: "OrangeRed",
-  barWidth: 3,
+  waveColor: "violet",
+  progressColor: "purple",
+  cursorColor: "purple",
+
+  //plugins: [
+  //  TimelinePlugin.create({
+  //    container: "#wave-timeline",
+  //    deferInit: true, // stop the plugin from initialising immediately
+  //  }),
+  //  MinimapPlugin.create(),
+  //],
+
+  //barWidth: 3,
   barRadius: 3,
   responsive: true,
   height: 100,
@@ -24,16 +35,19 @@ const PlayerWaveForm = ({ url }) => {
 
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
-  const [playing, setPlay] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
+  const [duration, setDuration] = useState(null);
+  const [currentTime, setCurrentTime] = useState(null);
 
   // create new WaveSurfer instance
   // On component mount and when url changes
   useEffect(() => {
-    setPlay(false);
+    setPlaying(false);
 
     const options = formWaveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
+    wavesurfer.current.add;
 
     wavesurfer.current.load(url);
 
@@ -46,12 +60,23 @@ const PlayerWaveForm = ({ url }) => {
       if (wavesurfer.current) {
         wavesurfer.current.setVolume(volume);
         setVolume(volume);
+        const duration = wavesurfer.current.getDuration();
+        setDuration(duration);
+        const currentTime = wavesurfer.current.getCurrentTime();
+        setCurrentTime(currentTime);
       }
     });
-  }, []);
+
+    wavesurfer.current.on("seek", () => {
+      console.log("seek");
+      setPlaying(false);
+    });
+
+    return () => wavesurfer.current.destroy();
+  }, [url]);
 
   const handlePlayPause = () => {
-    setPlay(!playing);
+    setPlaying(!playing);
     wavesurfer.current.playPause();
   };
 
@@ -67,7 +92,14 @@ const PlayerWaveForm = ({ url }) => {
 
   return (
     <div className={container}>
-      <div id="waveform" ref={waveformRef} className={wave} />
+      <div
+        id="wave-timeline"
+        ref={waveformRef}
+        //onTimeChange={onTimeChange}
+        className={wave}
+      />
+      {currentTime && <h5>{Math.round(currentTime)} : </h5>}
+      {duration && <h5>{Math.round(duration)} s</h5>}
       <div className={controls}>
         <button className={button} onClick={handlePlayPause}>
           {!playing ? "Play" : "Pause"}
