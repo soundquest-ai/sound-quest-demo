@@ -8,7 +8,7 @@ import styles from "./renderData.module.css";
 const RenderData = ({ value }) => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data, error } = useSWR(
-    `/api/v1/filter/?filter=${value}&skip=0&limit=100`,
+    `/api/v1/filter?filter=${value}&skip=0&limit=100`,
     fetcher
   );
 
