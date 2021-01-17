@@ -27,7 +27,10 @@ class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
             db.query(
                 Document,
                 func.ts_headline(
-                    text("fulltext_regconfig::regconfig"), Document.fulltext, ts_query
+                    text("fulltext_regconfig::regconfig"),
+                    Document.fulltext,
+                    ts_query,
+                    "MaxFragments=10, minWords=4, maxWords=8",
                 ),
             )
             .filter(Document.fulltext_search_vector.op("@@")(ts_query))
