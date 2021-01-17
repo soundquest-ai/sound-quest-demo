@@ -31,7 +31,7 @@ const RenderData = ({ value }) => {
   return <div>{dataComponents}</div>;
 };
 
-const DisplayData = ({ title, document_id, words }) => {
+const DisplayData = ({ title, document_id, words, headline }) => {
   const { container, dataInfo } = styles;
   return (
     <div className={container}>
