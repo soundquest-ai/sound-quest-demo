@@ -1,4 +1,5 @@
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
+from enum import Enum
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
@@ -51,9 +52,13 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             update_data = obj_in
         else:
             update_data = obj_in.dict(exclude_unset=True)
-        for field in obj_data:
-            if field in update_data:
-                setattr(db_obj, field, update_data[field])
+        for field, value in update_data.items():
+            assert hasattr(db_obj, field)
+
+            # Enum types are converted to their value.
+            if isinstance(value, Enum):
+                value = value.value
+            setattr(db_obj, field, value)
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
