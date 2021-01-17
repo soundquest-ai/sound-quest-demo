@@ -28,7 +28,7 @@ class AWSTranscription(BaseModel):
 # Shared properties
 class DocumentBase(BaseModel):
     title: Optional[str] = None
-    language: Language = Language.de_DE
+    language: Optional[Language] = Language.de_DE
 
 
 # Properties to receive via API on creation
