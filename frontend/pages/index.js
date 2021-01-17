@@ -1,11 +1,12 @@
 import Layout from "../components/Layout/Layout";
-import HomeSearch from "../components/Home/HomeSearch";
+import HomeSearch from "../components/HomeSearch/HomeSearch";
 
-export default function Home() {
+const Home = () => {
   return (
     <Layout>
-      {" "}
       <HomeSearch />
     </Layout>
   );
-}
+};
+
+export default Home;

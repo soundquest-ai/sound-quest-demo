@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import styles from "./home.module.css";
+import styles from "./homeSearch.module.css";
 import Link from "next/link";
 
-export default function HomeSearch() {
+const HomeSearch = () => {
   const [search, setSearch] = useState(null);
 
-  function onChangeHandler(e) {
+  const {
+    searchContainer,
+    searchSection,
+    title,
+    searchInput,
+    searchBtnContainer,
+    searchBtn,
+  } = styles;
+
+  const onChangeHandler = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
   const handleKeyPress = (e) => {
     //it triggers by pressing the enter key
@@ -17,24 +26,26 @@ export default function HomeSearch() {
   };
 
   return (
-    <div className={styles.searchContainer}>
-      <div className={styles.searchSection}>
-        <h1 className={styles.title}>SoundQuest</h1>
+    <main className={searchContainer}>
+      <section className={searchSection}>
+        <h1 className={title}>SoundQuest</h1>
         <input
-          className={styles.searchInput}
+          className={searchInput}
           type="text"
           placeholder="Search SoundQuest"
           onChange={onChangeHandler}
           onKeyDown={handleKeyPress}
         />
-        <div className={styles.searchBtnContainer}>
+        <div className={searchBtnContainer}>
           <Link href={`/search?title=${search}`}>
-            <button id="search" className={styles.searchBtn}>
+            <button id="search" className={searchBtn}>
               Go!
             </button>
           </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
-}
+};
+
+export default HomeSearch;

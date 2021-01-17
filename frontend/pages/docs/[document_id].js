@@ -1,25 +1,34 @@
 import { useRouter } from "next/router";
+
+import RenderData from "../../components/Individual-Data-Page/RenderData";
+
 import Layout from "../../components/Layout/Layout";
-import IndividualDocument from "../../components/Individual-Data-Page/RenderData";
 
 // This gets called on every request
-export async function getServerSideProps(context) {
-  const { document_id } = context.params;
 
-  // Fetch data from external API
-  const res = await fetch(`http://localhost:8888/api/v1/docs/${document_id}`);
-  const data = await res.json();
+//function getData() {
+//  console.log("hello");
 
-  data.document_id = document_id;
+//  console.log(query);
 
-  // Pass data to the page via props
-  return { props: { data } };
-}
+//  // Fetch data from external API
+//  async function ausyncCall(query) {
+//    const res = await fetch(`http://localhost:8888/api/v1/docs/${query}`);
+//    const data = await res.json();
 
-const Document = ({ data }) => {
+//    data.document_id = document_id;
+
+//    return <Document data={data} />;
+//  }
+//}
+
+const Document = () => {
+  const Router = useRouter();
+  const query = Router.query;
+
   return (
     <Layout>
-      <IndividualDocument data={data} />
+      <RenderData query={query} />
     </Layout>
   );
 };

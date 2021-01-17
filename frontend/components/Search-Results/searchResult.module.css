@@ -1,5 +1,5 @@
 /* SEARCH SECTION */
-.search {
+.searchContainer {
   width: 100%;
 }
 
@@ -25,4 +25,10 @@
   padding: 0.5rem;
 }
 
+.link {
+  padding: 10px;
+  color: blue;
+  display: inline-block;
+  cursor: pointer;
+}
 /* END SEARCH SECTION */

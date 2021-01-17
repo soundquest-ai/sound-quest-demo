@@ -1,4 +1,5 @@
 .searchContainer {
+  grid-column: 3 / span 9;
   display: flex;
   justify-content: center;
   justify-content: center;
