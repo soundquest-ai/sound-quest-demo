@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "./renderData.module.css";
 import Player from "../MusicPlayer/Player";
 
@@ -31,6 +32,8 @@ const RenderData = ({ query }) => {
 
 const DisplayData = ({ title, document_id, words, transcription }) => {
   const [time, setTime] = useState(null);
+  const router = useRouter();
+
   console.log("time", time);
   const formatedText = [];
   words.map((item) => {
@@ -72,14 +75,7 @@ const DisplayData = ({ title, document_id, words, transcription }) => {
       </div>
 
       <div className={styles.linkStyles}>
-        <Link
-          href={{
-            pathname: "/search/",
-            query: { title: encodeURI(title) },
-          }}
-        >
-          Search
-        </Link>
+        <span onClick={() => router.back()}>Back</span>
       </div>
       <h1 className={styles.title}>{title}</h1>
       <Player document_id={document_id} />
