@@ -7,10 +7,11 @@ import styles from "./renderData.module.css";
 
 const RenderData = ({ value }) => {
   const fetcher = (url) => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR(
-    `/api/v1/filter?filter=${value}&skip=0&limit=100`,
-    fetcher
-  );
+
+  // the filter url should end with a "/" otherwise there will be a redirect
+  const url = `/api/v1/filter/?filter=${value}&skip=0&limit=100`;
+
+  const { data, error } = useSWR(url, fetcher);
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
