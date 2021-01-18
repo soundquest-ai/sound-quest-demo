@@ -7,7 +7,13 @@ from sqlalchemy.orm import Session
 from app.core.security import get_password_hash, verify_password
 from app.crud.base import CRUDBase
 from app.models.document import Document
-from app.schemas.document import DocumentCreate, DocumentUpdate, FilteredDocument
+from app.schemas.document import (
+    DocumentCreate,
+    DocumentUpdate,
+    FilteredDocument,
+    Headline,
+    HeadlineToken,
+)
 
 
 class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
@@ -52,9 +58,24 @@ class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
         for result in res:
 
             document = result[0]
-            headlines_raw = result[1].split("|")
+            headlines_raw = result[1].split(fragment_delimiter)
 
-            headlines = headlines_raw
+            headlines = []
+            for hl in headlines_raw:
+                remaining = hl
+                tokens = []
+                while start_sel in remaining:
+                    token, _, remaining = remaining.partition(start_sel)
+                    if token:
+                        tokens.append(HeadlineToken(text=token, match=False))
+                    token, _, remaining = remaining.partition(stop_sel)
+                    assert token
+                    tokens.append(HeadlineToken(text=token, match=True))
+
+                if remaining:
+                    tokens.append(HeadlineToken(text=remaining, match=False))
+
+                headlines.append(Headline(tokens=tokens))
 
             retval.append(FilteredDocument(document=document, headlines=headlines))
 

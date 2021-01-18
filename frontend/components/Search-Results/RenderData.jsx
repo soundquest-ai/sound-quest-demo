@@ -31,8 +31,22 @@ const RenderData = ({ value }) => {
   return <div>{dataComponents}</div>;
 };
 
+const Headline = ({ headline }) => {
+  const formatedText = [];
+  headline.tokens.map((item) => {
+    formatedText.push(
+      item.match ? <b> {item.text} </b> : <div>{item.text} </div>
+    );
+  });
+  return formatedText;
+};
+
 const Headlines = ({ headlines }) => {
-  const listItems = headlines.map((item) => <li key={item}>{item}</li>);
+  const listItems = headlines.map((item) => (
+    <li key={item.text}>
+      <Headline headline={item} />
+    </li>
+  ));
   return <ul>{listItems}</ul>;
 };
 

@@ -62,8 +62,21 @@ class DocumentInDB(DocumentInDBBase):
     pass
 
 
+class HeadlineToken(BaseModel):
+    """One token of a headline"""
+
+    text: str
+    match: bool
+
+
+class Headline(BaseModel):
+    """Model for a headline"""
+
+    tokens: List[HeadlineToken]
+
+
 class FilteredDocument(BaseModel):
     """Model for returned by the filter_document"""
 
     document: Document
-    headlines: List[str]
+    headlines: List[Headline]
