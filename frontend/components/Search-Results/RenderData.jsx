@@ -32,11 +32,17 @@ const RenderData = ({ value }) => {
 };
 
 const Headline = ({ headline }) => {
+  // build an array where each items represents one token of the headline.
   const formatedText = [];
+
+  // populate the formatedText array from headline.tokens
   headline.tokens.map((item) => {
-    formatedText.push(
-      item.match ? <b> {item.text} </b> : <div>{item.text} </div>
-    );
+    // the match attribute of the token tells us if this token is
+    // part of the match for the search query. Depending on it, we
+    // set the style
+    const style = item.match ? styles.headlineMatch : styles.headlineNoneMatch;
+
+    formatedText.push(<div className={style}> {item.text} </div>);
   });
   return formatedText;
 };

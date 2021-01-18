@@ -4,3 +4,12 @@
   align-items: center;
   border-bottom: 1px groove #212121;
 }
+
+.headlineMatch {
+  /* TODO: Change this color accorging to styles. #991111 is just a random pick! */
+  color: #991111;
+}
+
+.headlineNonMatch {
+  color: #000000;
+}
