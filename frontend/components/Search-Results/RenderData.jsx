@@ -23,7 +23,7 @@ const RenderData = ({ value }) => {
         title={item.document.title}
         document_id={item.document.id}
         words={item.document.words.length}
-        headline={item.headline}
+        headlines={item.headlines}
       />
     )
   );
@@ -31,8 +31,14 @@ const RenderData = ({ value }) => {
   return <div>{dataComponents}</div>;
 };
 
-const DisplayData = ({ title, document_id, words, headline }) => {
+const Headlines = ({ headlines }) => {
+  const listItems = headlines.map((item) => <li key={item}>{item}</li>);
+  return <ul>{listItems}</ul>;
+};
+
+const DisplayData = ({ title, document_id, words, headlines }) => {
   const { container, dataInfo } = styles;
+
   return (
     <div className={container}>
       <div className={dataInfo}>
@@ -46,8 +52,7 @@ const DisplayData = ({ title, document_id, words, headline }) => {
             {title}
           </Link>
         </h3>
-        <p>Number of words: {words}</p>
-        <p>{headline}</p>
+        <Headlines headlines={headlines} />
       </div>
       <Player document_id={document_id} />
     </div>

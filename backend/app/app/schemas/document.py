@@ -66,4 +66,4 @@ class FilteredDocument(BaseModel):
     """Model for returned by the filter_document"""
 
     document: Document
-    headline: str
+    headlines: List[str]

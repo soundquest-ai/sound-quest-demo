@@ -30,7 +30,7 @@ class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
                     text("fulltext_regconfig::regconfig"),
                     Document.fulltext,
                     ts_query,
-                    "MaxFragments=10, minWords=4, maxWords=8",
+                    "MaxFragments=10, minWords=4, maxWords=8, StartSel = <, StopSel = >, FragmentDelimiter=|",
                 ),
             )
             .filter(Document.fulltext_search_vector.op("@@")(ts_query))
@@ -39,7 +39,17 @@ class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
             .all()
         )
 
-        return [FilteredDocument(document=r[0], headline=r[1]) for r in res]
+        retval = []
+        for result in res:
+
+            document = result[0]
+            headlines_raw = result[1].split("|")
+
+            headlines = headlines_raw
+
+            retval.append(FilteredDocument(document=document, headlines=headlines))
+
+        return retval
 
 
 document = CRUDDocument(Document)
