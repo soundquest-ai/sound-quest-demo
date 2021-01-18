@@ -23,6 +23,10 @@ class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
             text("fulltext_regconfig::regconfig"), filter_str
         )
 
+        start_sel = "<"
+        stop_sel = ">"
+        fragment_delimiter = "|"
+
         res = (
             db.query(
                 Document,
@@ -30,7 +34,12 @@ class CRUDDocument(CRUDBase[Document, DocumentCreate, DocumentUpdate]):
                     text("fulltext_regconfig::regconfig"),
                     Document.fulltext,
                     ts_query,
-                    "MaxFragments=10, minWords=4, maxWords=8, StartSel = <, StopSel = >, FragmentDelimiter=|",
+                    f"MaxFragments=10, "
+                    f"minWords=4, "
+                    f"maxWords=8, "
+                    f"StartSel = {start_sel}, "
+                    f"StopSel = {stop_sel}, "
+                    f"FragmentDelimiter={fragment_delimiter}",
                 ),
             )
             .filter(Document.fulltext_search_vector.op("@@")(ts_query))
