@@ -8,6 +8,7 @@
 .headlineMatch {
   /* TODO: Change this color accorging to styles. #991111 is just a random pick! */
   color: #991111;
+  font-weight: bold;
 }
 
 .headlineNonMatch {
