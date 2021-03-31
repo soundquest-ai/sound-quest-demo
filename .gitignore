@@ -1,3 +1,18 @@
+# python stuff
+__pycache__
+.mypy_cache
+
+#Pycharm IDE stuff
+.idea
+
+.vscode
+
+docker-stack.yml
+
+# directories created by docker-compose
+file_store
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
